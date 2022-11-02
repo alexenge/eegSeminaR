@@ -58,17 +58,17 @@ The ERP CORE data can be downloaded directly from the OSF website (<https://osf.
 
 But first, let's create an empty directory for storing the data. Again, we could do this manually, or we could use R. The `here()` function from the `here` package makes it possible to define the directory with a **relative path**. This is useful because it means that the code will work regardless of from where in the file system we're running it.
 
-```{r, eval=FALSE}
+```{r}
 data_dir <- here::here("data/n170")
 data_dir
-dir.create(data_dir, showWarnings = FALSE recursive = TRUE)
+dir.create(data_dir, recursive = TRUE)
 ```
 
 Now we can use the `get_erpcore()` function to download the data into this directory. We choose the `"bids"` version of the data (there also is a `"raw"` version on OSF that has the data before they were converted to BIDS).
 
 For the examples in class we only need the data from the N170 task and from one subject (here `"sub-001"`). For your group projects focussing on one of the other ERP tasks/components, you may want to download the full data from all subjects (by leaving the `subjects` argument blank).
 
-```{r, eval=FALSE}
+```{r}
 erpcore::get_erpcore(
   component = "n170",
   dest_path = data_dir,
