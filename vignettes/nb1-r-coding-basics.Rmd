@@ -1,0 +1,274 @@
+---
+title: "1. R coding basics"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{1. R coding basics}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor: visual
+editor_options:
+  chunk_output_type: inline
+---
+
+> 🎯 **Goals**
+>
+> -   To learn how to calculate stuff in R and to save the results as a variable
+> -   To know the most important types of data structures in R
+> -   To be able to use, search for, and write R functions
+> -   To learn about how to install and use R packages
+
+## 1.1 Doing math
+
+Think of R and most other programming languages like a very fancy calcutor: It takes one or more inputs, based on which it computes an output.
+
+Examples of this are simple mathematical operations like multiplying two numbers.
+
+In RStudio, you can hit the green triangle on the right side of each chunk of code to run it. The output will be shown directly below the code.
+
+```{r}
+2 * 2
+```
+
+Don't worry about the part in square brackets (`[1]`): This simply indexes the number of elements in the output. It will become clearer and more useful once we get to more complex types of data.
+
+> ✍️ **Exercise 1.1**
+>
+> Check the current temperature in Berlin on the internet. Then use R to convert it from degrees Celsius to degrees Fahrenheit. The formula is: $\text{°C}\times1.8+32$
+>
+> In these kinds of exercises, you need to replace the three dots (`...`) with R code and then click the green triangle to run it.
+
+```{r, eval=FALSE}
+...
+```
+
+## 1.2 Variables
+
+The real power of programming languages is that they allow us to store the output of a computation as an intermediate result called a **variable**. We can then use this virable as the input for the next computation.
+
+We **assign** (that is, create or define) a variable by choosing a custom name (here `my_var`) together with an arrow symbol (`<-`).
+
+```{r}
+my_var <- 2 + 2
+my_var
+```
+
+```{r}
+my_var ^ 2
+```
+
+> ✍️ **Exercise 1.2**
+>
+> Re-do the temperature calculation from Exercise 1.1, but this time storing the two different types of temperature in two separate variables.
+
+```{r, eval=FALSE}
+degrees_celsius <- ...
+... <- ...
+degrees_fahrenheit
+```
+
+## 1.3 Data types
+
+So far, we've only been dealing with one type of data: numbers. But we can also use R to store and perform operations on other types of data. The most basic ones are:
+
+-   **`numeric`**: A number.
+
+```{r}
+13.4
+```
+
+-   **`character`**: A string of letters. Must be surrounded by qutation marks (`"..."`).
+
+```{r}
+"Hello world"
+```
+
+-   **`logical`**: The logical statements `TRUE` and `FALSE`. These can be used, for instance, to code if the response to a question was correct or incorrect.
+
+```{r}
+TRUE
+```
+
+You can check the type of a variable using the `class()` function (note that you will learn more about functions below):
+
+```{r}
+class(my_var)
+```
+
+All examples until now consisted of only one element (e.g., a single number or character string). However, we often want store and manipulate multiple values at once. To do this, we can use following data types:
+
+-   **Vector**: A list of elements, where all elements are of the same type. Vectors are defined using the `c()` function (the `c` stands for "combine").
+
+```{r}
+c(1, 5, 8, 21)
+```
+
+-   **`data.frame`**: A table, that is, a two-dimensional structure with rows and columns. Each column is a vector. It is often a good idea to give each column a name (defined the part before the `=` sign).
+
+```{r}
+data.frame(
+  country = c("Germany", "UK", "Denmark"),
+  population_mil = c(84.1, 67.1, 5.9),
+  eu_member = c(TRUE, FALSE, TRUE)
+)
+```
+
+-   `list`: A list of elements, where the elements can be of different types (remember that this was not the case for vectors!). This makes lists extremeley powerful, because they can be made arbitrarily complex (e.g., contain data frames or other lists).
+
+```{r}
+list("Hello world!", 42, c("Vector", "inside", "a", "list!"))
+```
+
+> ✍️ **Exercise 1.3**
+>
+> As a group, create one vector with your names and another vector with your heights (in cm). Combine these two vectors into a data frame.
+
+```{r, eval=FALSE}
+names <- ...
+heights <- ...
+persons <- data.frame(
+  ...,
+  ...
+)
+persons
+```
+
+## 1.4 Selecting data
+
+Often we have a large amount of data (e.g., a long vector or a big data frame) and want to analyze only a subset of them. There are multiple ways of doing this:
+
+-   By an **index**: The index *n* (here: `5`) selects the *n*th (here: fifth) element in a vector.
+
+```{r}
+my_vector <- c(2, 3, 5, 7, 11, 13, 17, 19, 23)
+my_vector[5]
+```
+
+-   You can select a **range of indices** using a colon (`:`).
+
+```{r}
+my_vector[2:4]
+```
+
+-   By a **logical condition**: You can "test" each element of your vector for a certain condition that produces a logical (`TRUE` or `FALSE`) value.
+
+```{r}
+my_vector[my_vector > 5]
+```
+
+-   Since data frames have two dimensions (rows and columns), we need to provide **two indices** (a row and a column, separated by a comma) to index a certain element:
+
+```{r}
+universities <- data.frame(
+  city = c("Heidelberg", "Leipzig", "Rostock", "Greifswald"),
+  established = c(1386, 1409, 1419, 1456),
+  students_k = c(31.5, 29.5, 14.0, 12.0)
+)
+universities[1, 3]
+```
+
+-   We can select **all rows (or columns)** by leaving the respective index empty
+
+```{r}
+universities[2, ]
+```
+
+-   We can select only **a single column** by using dollar sign (`$`) and the column name. Note that this returns a vector (because every data frame column is a vector).
+
+```{r}
+universities$established
+```
+
+-   Combining what we've seen above, we can extract only records (rows) that fulfill a certain logical condition:
+
+```{r}
+universities[universities$students_k > 20, ]
+```
+
+> ✍️ **Exercise 1.4**
+
+## 1.5 Functions
+
+So far, we have dealt with how to create different types of variables and perform mathematical operations on them. Luckily, R can do much more than that and, luckily, we don't need to implement many common tasks ourselves.
+
+For instance, if we want to compute the mean accross a vector of numbers, we can simply use the `mean(…)` function:
+
+```{r}
+my_vector <- c(2, 4, 6, 8)
+mean(my_vector)
+```
+
+We can confirm the result with basic math -- but note that this would be a lot more tedious for more complex tasks, like fitting a linear regression model.
+
+```{r}
+(2 + 4 + 6 + 8) / 4
+```
+
+Here's how we call the different bits and pieces when using a function:
+
+-   The **name** of the function defines which function we want to use.
+
+-   The **arguments** of the functions are the inputs that we want the function to do something with
+
+    -   Each argument has the form of `key = value`, where the key is the name of the argument (as defined by the author of the function) and the value is the stuff we choose (e.g., the input data or additional options).
+
+    -   The first argument of a function is often the data (here in the form of a vector). It is common practice to leave out the name of this argument. But we could also have written `mean(x = my_vector)` instead of `mean(my_vector).`
+
+    -   Multiple arguments are separated from another by commas.
+
+-   The **return value** is the object that the function gives back to us. Here, it's a single number (the mean). We can print this value or, as in the example above, assign it to a new variable (here `my_mean`).
+
+> ✍️ **Exercise 1.5**
+>
+> Intuitively, one might have thought that the easiest way to compute the mean of four numbers would be `mean(2, 4, 6, 8)`. Why doesn't this work?
+
+> 💡 **FYI: R can be confusing**
+>
+> While not the case for `mean()`, some functions *do* actually take an arbitrary number of positional arguments. An example is `paste()`, which pastes together multiple character strings into on long character string.
+>
+> You can check the help file of a function (see below how) to see if a function behaves like `mean()`, with a single first element (typically called `x`), or like `paste()`, with an arbitrary number of positional input arguments (indicated by `...` in the help file).
+
+## 1.6 Getting help
+
+If you want to learn more about a function (e.g., the names of the arguments or the kind of return value), you can open the help page of the function using `help()` function:
+
+```{r}
+help(mean)
+```
+
+Or use the shortcut `?function_name`:
+
+```{r}
+?mean
+```
+
+However, that only helps if you already know (part of) the function name. If not, you can try to ask Google for what you want to achieve (e.g., "average a vector of numbers in R"). This also helps when R gives you an error message.
+
+> ✍️ **Exercise 1.6**
+>
+> Find out the R function to create a vector of random numbers from a normal distribution. Once you know the name of the function, use it to create a vector of 100 numbers with a mean 500 and a standard deviation of 50.
+
+```{r, eval=FALSE}
+random_numbers <- ...
+random_numbers
+```
+
+## 1.7 Packages
+
+R comes with "batteries included" -- it has useful functions for many different tasks, from creating data structures (e.g., `c()`, `data.frame()`) to descriptive statistics (e.g., `mean()`, `sd()`) and inferential statistics (e.g., `t.test()`, `lm()`).
+
+But there are specialized tasks for which there are no functions within the R language itself (also called "base R"). Luckily, researchers and software developers around the world have already written packages (that is, collections of custom functions) for many use cases.
+
+To use functions from an external package, we first need to download and install the package on our computer. This only needs to be done once and therefore should usually not be part of any R script or notebook that we write and share with others.
+
+```{r, eval=FALSE}
+install.packages("cowsay")
+```
+
+We then have to load the package if we want to be able to use its functions. This needs to be done every time that we start a new R session (e.g., when we close and then re-open RStudio).
+
+```{r}
+library(cowsay)
+say("What a cool function!")
+```
+
+An alternative to using `library()`, you can also use `package_name::function_name()`. This is useful if you want to use only a single function from the package, so there's no need to load the whole thing.

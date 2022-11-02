@@ -1,0 +1,188 @@
+---
+title: "3. Preprocessing"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{3. Preprocessing}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor: visual
+editor_options:
+  chunk_output_type: inline
+---
+
+> 🎯 **Goals**
+>
+> -   Learn how to load EEG data into R
+> -   Visually inspect the raw EEG signal
+> -   Learn how to deal with eye movement artifacts
+> -   Understand the basics of filtering for improving the signal-to-noise ratio
+
+## 3.1 Loading EEG data
+
+-   Loading required packages:
+
+    -   `here` for working with file paths
+
+    -   `eegUtils` for working with EEG data (Craddock, 2022)
+
+```{r, message=FALSE}
+library(here)
+library(eegUtils)
+```
+
+-   Downloaded ERP CORE data is in `data/n170` (see Section 2.6)
+
+-   Data is in BIDS format; each subject has it's own `sub-XXX/eeg` sub-directory
+
+-   We need to find the `.set` file for loading the EEG data
+
+```{r}
+bids_dir <- here("data/n170")
+set_file <- here(bids_dir, "sub-001/eeg/sub-001_task-N170_eeg.set")
+file.exists(set_file)
+```
+
+-   `eegUtils` has functions for loading ("importing") raw EEG data from various file formats into R, including the `.set` format used by ERP CORE
+
+```{r}
+(eeg <- import_set(set_file))
+```
+
+-   Let's see what type of data we've got:
+
+```{r}
+class(eeg)
+```
+
+-   `eeg_data` is a custom class defined by `eegUtils`. It's a big list with many sub-components (mostly data frames)
+
+```{r}
+str(eeg)
+```
+
+-   The **actual EEG data** are in a data frame callsed `signals`
+
+    -   Each **row** is one **sample** (time point)[^1]
+
+    -   Each **column** is one **channel** (EEG/EOG electrode)
+
+    -   Each **value** is the **EEG voltage** (in microvolts; µV) measured at this time sample and channel
+
+-   The other parts of the `eeg_data` contain useful **meta-information**, some of which will become important in later sections
+
+[^1]: Technichally, the EEG gets recorded by the EEG electrodes in a continuous (analog) fashion, meaning it continously evolves over time. The discrete time steps that we're dealing with here were created by the EEG amplifier during the *digitization* step of the online EEG recording.
+
+## 3.2 Viewing EEG data
+
+-   It's usually a good idea to start any analysis by **visually check the raw data**, and doing so again at multiple steps throughout the analysis pipeline (quality control)
+
+```{r, eval=FALSE, message=FALSE}
+browse_data(eeg)
+```
+
+-   Check out multiple time points ("Display start time") and switch between the "Individual" view, plotting all channels below one another, and the "Butterfly" view, plotting all channels on top of each other
+
+> ✍️ **Exercise 3.2**
+>
+> Inspect the data at different time points and channels. Note down any features of data you find interesting and potentially relevant to deal with in our analysis.
+
+-   Remember to click "Done" or you will not be able to continue with running the next piece of code
+
+## 3.3 Load channel locations
+
+-   Some steps (e.g., making plots) require R to know the **relative position of channels** on the scalp
+
+-   For some EEG file formats, this is loaded directly with the raw data, but here we need to electrode locations manually:
+
+```{r}
+eeg <- electrode_locations(eeg, montage = "biosemi64", overwrite = TRUE)
+eeg$chan_info
+```
+
+```{r, warning=FALSE}
+plot_electrodes(eeg, interact = TRUE)
+```
+
+-   The correct `"biosemi64"` locations are directly provided by `eegUtils`, but we could also have used the `electrodes.tsv` file from the BIDS structure
+
+## 3.4 Downsampling
+
+-   The **sampling rate** defines the number of EEG voltages we've recorded per second (= Hertz):
+
+```{r}
+eeg$srate
+```
+
+-   This means that each pair of samples is less than 1 ms apart!
+
+```{r}
+1 / eeg$srate
+```
+
+-   We typically don't need *that* much temporal resolution,[^2] so it is often useful to **downsample** the data
+
+```{r}
+eeg_downs <- eeg_downsample(eeg, q = 4.0) # q is the downsampling factor
+```
+
+-   This reduces our computer's memory load and will make subsequent computations faster
+
+```{r}
+show_object_size_mb <- function(x) format(object.size(x), units = "MB")
+lapply(list(raw = eeg, downsampled = eeg_downs), show_object_size_mb)
+```
+
+![*Moderate downsampling typically doesn't affect how the data will look and behave in subsequent analyses.*](https://i.imgflip.com/6xle88.jpg){fig-align="center" width="300"}
+
+[^2]: This is because both the *cognitive processes* that we are interested in (e.g., perception, language, memory) and the *biological processes* that we detect with the EEG (mostly post-synaptic potentials) unfold on the orders of 10--100 ms rather than 1 ms.
+
+## 3.5 Epoching
+
+-   
+
+```{r}
+n170_events <- c(1:80)
+epo <- epoch_data(eeg_downs, n170_events, time_lim = c(-0.2, 0.8))
+```
+
+```{r}
+epo$epochs
+```
+
+```{r}
+epo$epochs$condition <- ifelse(epo$epochs$event_type <= 40, "face", "car")
+epo$epochs$condition <- factor(epo$epochs$condition, levels = c("face", "car"))
+epo$epochs
+```
+
+## 3.6 Correcting eye artifacts
+
+```{r, eval=FALSE}
+ica <- run_ICA(epo, method = "fastica")
+```
+
+```{r, eval=FALSE}
+browse_data(ica)
+```
+
+```{r, eval=FALSE}
+filt <- eeg_filter(eeg, 1, 10)
+epo <- epoch_data(filt, n170_events, time_lim = c(-0.2, 0.8))
+epo <- select_elecs(epo, c("HEOG_left", "HEOG_right", "VEOG_lower"), keep = FALSE)
+epo <- rm_baseline(epo, time_lim = c(-0.2, 0.0))
+library(ggplot2)
+plot_butterfly(epo, time_lim = c(0.0, 0.6)) +
+  theme_void() +
+  scale_color_viridis_d(option = "mako") +
+  theme(
+    aspect.ratio = 0.5,
+    panel.background = element_rect(fill = NA, color = NA),
+    legend.position = "none"
+  ) -> p
+p$layers[2:3] <- NULL
+p$layers[[1]]$aes_params$size <- 4.0
+p$layers[[1]]$aes_params$alpha <- 1.0
+p
+
+ggsave("butterfly.png")
+```

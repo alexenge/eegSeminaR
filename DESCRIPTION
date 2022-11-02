@@ -1,0 +1,27 @@
+Package: eegSeminaR
+Type: Package
+Title: A Seminar on Analyzing EEG Data in R
+Version: 2022.0
+Date: 2022-11-02
+Authors@R: c(
+  person("Alexander", "Enge", role = c("aut", "cre", "cph"), email = "alexander.enge@hu-berlin.de"),
+  person("Rasha", "Abdel Rahman", role = c("aut", "cph")))
+Maintainer: Alexander Enge <alexander.enge@hu-berlin.de>
+Description: This is a MSc-level university seminar that covers the basics of analyzing
+    EEG data in R. It uses the openly available ERP CORE dataset (Kappenman et al.,
+    2021, NeuroImage) to illustrate various aspects of loading, preprocessing,
+    visualization, and statistical analysis of the data. 
+License: CC BY 4.0
+Encoding: UTF-8
+LazyData: true
+Imports:
+    cowsay,
+    here
+Suggests: 
+    knitr,
+    rmarkdown
+Remotes: 
+    craddm/eegUtils
+    eegverse/erpcore
+VignetteBuilder: knitr
+URL: https://alexenge.github.io/eegSeminaR/

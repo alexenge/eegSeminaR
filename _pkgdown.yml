@@ -1,0 +1,20 @@
+url: https://alexenge.github.io/eegSeminaR/
+template:
+  bootstrap: 5
+  bootswatch: litera
+  bslib:
+    pkgdown-nav-height: 100px
+navbar:
+  structure:
+    left:  [articles, reference]
+    right: [search]
+  components:
+    articles:
+      text: Course materials
+      menu:
+      - text: "1. R coding basics"
+        href: articles/nb1-r-coding-basics.html
+      - text: "2. Open data"
+        href: articles/nb2-open-data.html
+      - text: "3. Preprocessing"
+        href: articles/nb3-preprocessing.html

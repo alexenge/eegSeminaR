@@ -1,0 +1,82 @@
+---
+title: "2. Open data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{2. Open data}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor: visual
+editor_options:
+  chunk_output_type: inline
+---
+
+> 🎯 **Goals**
+>
+> -   To describe how Open Data can help psychological research
+> -   To learn about sources for Open Data
+> -   To get a first glimpse at the ERP CORE dataset
+
+## 2.1 Research we can trust
+
+[![*The replication crisis in psychology. Source: Harvard University*](https://projects.iq.harvard.edu/files/psychology-replications/files/logo.png){fig-align="center" width="300"}](https://projects.iq.harvard.edu/psychology-replications/home)
+
+We want our research findings to be trustworthy -- meaning that at the very least, other researchers should be able get the same results when running the same experiments and analyzing the data in the same way (meaning that our results are *replicable*).
+
+[![*Terminology for trustworthy research. Source: The Turing Way*](https://the-turing-way.netlify.app/_images/reproducible-definition-grid.jpg)](https://the-turing-way.netlify.app/reproducible-research/overview/overview-definitions.html)
+
+But: Collecting new data can be costly in terms of time and resources (esp. for EEG and fMRI studies). Still, simply sharing one's existing data allows others to establish the *reproducibility* of the results (a prerequisite for *replicability*) as well as their *robustness* (a prerequisite for *generalizatbility*).
+
+## 2.2 Why open data?
+
++-------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+
+| Pros                                                                                                              | Cons                                                        |
++===================================================================================================================+=============================================================+
+| -   Others can try to reproduce your analysis                                                                     | -   Privacy concerns -\> Informed consent, pseudonymization |
+|                                                                                                                   |                                                             |
+| -   Others can probe the robustness of your results (e.g., use different exclusion criteria or software packages) | -   Additional effort in preparing and documenting the data |
+|                                                                                                                   |                                                             |
+| -   Others can analyze their own research questions                                                               | -   Fear of getting "scooped"                               |
+|                                                                                                                   |                                                             |
+| -   Others can use your data for methods development and teaching                                                 |                                                             |
+|                                                                                                                   |                                                             |
+| -   You have a (well-documented) backup of the data                                                               |                                                             |
+|                                                                                                                   |                                                             |
+| -   You will get cited when others use your data                                                                  |                                                             |
+|                                                                                                                   |                                                             |
+| -   Increased return for participants' time and taxpayers' money                                                  |                                                             |
++-------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+
+
+: Pros and cons of open data
+
+## 2.5 The ERP CORE data
+
+![](https://ars.els-cdn.com/content/image/1-s2.0-S1053811920309502-gr1.jpg)
+
+## 2.6 Downloading ERP CORE data
+
+The ERP CORE data can be downloaded directly from the OSF website (<https://osf.io/thsqg/>). But we're instead going to use the R package `erpcore`.
+
+But first, let's create an empty directory for storing the data. Again, we could do this manually, or we could use R. The `here()` function from the `here` package makes it possible to define the directory with a **relative path**. This is useful because it means that the code will work regardless of from where in the file system we're running it.
+
+```{r, eval=FALSE}
+data_dir <- here::here("data/n170")
+data_dir
+dir.create(data_dir, showWarnings = FALSE recursive = TRUE)
+```
+
+Now we can use the `get_erpcore()` function to download the data into this directory. We choose the `"bids"` version of the data (there also is a `"raw"` version on OSF that has the data before they were converted to BIDS).
+
+For the examples in class we only need the data from the N170 task and from one subject (here `"sub-001"`). For your group projects focussing on one of the other ERP tasks/components, you may want to download the full data from all subjects (by leaving the `subjects` argument blank).
+
+```{r, eval=FALSE}
+erpcore::get_erpcore(
+  component = "n170",
+  dest_path = data_dir,
+  type = "bids",
+  subjects = "sub-001"
+)
+```
+
+> ✍️ **Exercise 2.6**
+>
+> Open the `data/n170` directory in the file explorer and take a look at the different files that were downloaded. Can you figure out the purpose for all of them?
