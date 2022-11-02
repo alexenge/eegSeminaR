@@ -21,7 +21,7 @@ Suggests:
     knitr,
     rmarkdown
 Remotes: 
-    craddm/eegUtils
+    craddm/eegUtils,
     eegverse/erpcore
 VignetteBuilder: knitr
 URL: https://alexenge.github.io/eegSeminaR/
