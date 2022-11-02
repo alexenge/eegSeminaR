@@ -16,6 +16,8 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     cowsay,
+    eegUtils,
+    erpcore,
     here
 Suggests: 
     knitr,
