@@ -68,7 +68,7 @@ Now we can use the `get_erpcore()` function to download the data into this direc
 
 For the examples in class we only need the data from the N170 task and from one subject (here `"sub-001"`). For your group projects focussing on one of the other ERP tasks/components, you may want to download the full data from all subjects (by leaving the `subjects` argument blank).
 
-```{r, message=FALSE, eval=FALSE}
+```{r, message=FALSE}
 erpcore::get_erpcore(
   component = "n170",
   dest_path = data_dir,
