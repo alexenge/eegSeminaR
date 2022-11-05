@@ -5,7 +5,8 @@ articles:
   nb1-r-coding-basics: nb1-r-coding-basics.html
   nb2-open-data: nb2-open-data.html
   nb3-preprocessing: nb3-preprocessing.html
-last_built: 2022-11-02T18:39Z
+  nb4-epoching: nb4-epoching.html
+last_built: 2022-11-05T16:03Z
 urls:
   reference: https://alexenge.github.io/eegSeminaR/reference
   article: https://alexenge.github.io/eegSeminaR/articles

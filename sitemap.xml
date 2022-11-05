@@ -4,9 +4,6 @@
     <loc>https://alexenge.github.io/eegSeminaR/404.html</loc>
   </url>
   <url>
-    <loc>https://alexenge.github.io/eegSeminaR/LICENSE.html</loc>
-  </url>
-  <url>
     <loc>https://alexenge.github.io/eegSeminaR/articles/index.html</loc>
   </url>
   <url>
@@ -17,6 +14,9 @@
   </url>
   <url>
     <loc>https://alexenge.github.io/eegSeminaR/articles/nb3-preprocessing.html</loc>
+  </url>
+  <url>
+    <loc>https://alexenge.github.io/eegSeminaR/articles/nb4-epoching.html</loc>
   </url>
   <url>
     <loc>https://alexenge.github.io/eegSeminaR/authors.html</loc>
