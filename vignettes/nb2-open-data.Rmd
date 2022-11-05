@@ -10,15 +10,15 @@ editor_options:
   chunk_output_type: inline
 ---
 
-> 🎯 **Goals**
+> 🎯 **GOALS**
 >
-> -   To describe how Open Data can help psychological research
-> -   To learn about sources for Open Data
-> -   To get a first glimpse at the ERP CORE dataset
+> -   *To describe how Open Data can help psychological research*
+> -   *To learn about sources for Open Data*
+> -   *To get a first glimpse at the ERP CORE dataset*
 
 ## 2.1 Research we can trust
 
-[![*The replication crisis in psychology. Source: Harvard University*](https://projects.iq.harvard.edu/files/psychology-replications/files/logo.png){fig-align="center" width="300"}](https://projects.iq.harvard.edu/psychology-replications/home)
+[![*The replication crisis in psychology. Source: Harvard University*](images/crisis.png){fig-align="center" width="300"}](https://projects.iq.harvard.edu/psychology-replications/home)
 
 We want our research findings to be trustworthy -- meaning that at the very least, other researchers should be able get the same results when running the same experiments and analyzing the data in the same way (meaning that our results are *replicable*).
 
@@ -68,7 +68,7 @@ Now we can use the `get_erpcore()` function to download the data into this direc
 
 For the examples in class we only need the data from the N170 task and from one subject (here `"sub-001"`). For your group projects focussing on one of the other ERP tasks/components, you may want to download the full data from all subjects (by leaving the `subjects` argument blank).
 
-```{r}
+```{r, message=FALSE, eval=FALSE}
 erpcore::get_erpcore(
   component = "n170",
   dest_path = data_dir,
@@ -77,6 +77,6 @@ erpcore::get_erpcore(
 )
 ```
 
-> ✍️ **Exercise 2.6**
+> ✍️ **EXERCISE 2.6**
 >
-> Open the `data/n170` directory in the file explorer and take a look at the different files that were downloaded. Can you figure out the purpose for all of them?
+> *Open the `data/n170` directory in the file explorer and take a look at the different files that were downloaded. Can you figure out the purpose for all of them?*
