@@ -1,10 +1,11 @@
 url: https://alexenge.github.io/eegSeminaR/
 template:
   bootstrap: 5
-  bootswatch: litera
+  bootswatch: cosmo
   bslib:
     pkgdown-nav-height: 100px
 navbar:
+  bg: dark
   structure:
     left:  [articles, reference]
     right: [search]
@@ -18,3 +19,5 @@ navbar:
         href: articles/nb2-open-data.html
       - text: "3. Preprocessing"
         href: articles/nb3-preprocessing.html
+      - text: "4. Epoching"
+        href: articles/nb4-epoching.html
