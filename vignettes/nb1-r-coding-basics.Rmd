@@ -241,9 +241,8 @@ mean(my_vector)
 
     -   Arguments are separated from another by commas
 
-```{=html}
 <!-- -->
-```
+
 -   The **return value** is the output that the function gives back to us
 
 > **✍️ EXERCISE 1.5**
@@ -277,8 +276,7 @@ help(mean)
 > *Find out the R function to create a vector of random numbers from a normal distribution. Once you know the name of the function, use it to create a vector of 100 numbers with a mean 500 and a standard deviation of 50.*
 
 ```{r, eval=FALSE}
-random_numbers <- ...
-random_numbers
+(random_numbers <- ...)
 ```
 
 ## 1.7 Packages
@@ -352,9 +350,8 @@ celsius_to_fahrenheit(19.3)
 
 -   Let's assume we have a couple of friends and want to create a friendly message for each of them
 
-```{=html}
 <!-- -->
-```
+
 -   The naive approach:
 
 ```{r}

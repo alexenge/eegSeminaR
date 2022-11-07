@@ -53,7 +53,7 @@ file.exists(set_file)
 class(dat_raw)
 ```
 
--   `eeg_data` is a custom class defined by `eegUtils`. It's a big list with many sub-components (mostly data frames)
+-   `eeg_data` is a custom class defined by `eegUtils` -- It's a big list with many sub-components (see `?eeg_data`)
 
 ```{r}
 str(dat_raw)
@@ -131,7 +131,7 @@ show_size_mb <- function(x) format(object.size(x), units = "MB")
 lapply(list(raw = dat_raw, downsampled = dat_downs), show_size_mb)
 ```
 
-[![*Source: Imgflip meme generator*](https://i.imgflip.com/6xle88.jpg){fig-align="center" width="300"}](https://imgflip.com/memegenerator)
+[![Source: Imgflip meme generator](https://i.imgflip.com/6xle88.jpg){fig-align="center" width="300"}](https://imgflip.com/memegenerator)
 
 [^2]: This is because both the *cognitive processes* that we are interested in (e.g., perception, language, memory) and the *biological processes* that we detect with the EEG (mostly post-synaptic potentials) unfold on the orders of 10--100 ms rather than 1 ms.
 
@@ -150,7 +150,7 @@ eog_channels <- c("HEOG_left", "HEOG_right", "VEOG_lower")
 dat_reref <- eeg_reference(dat_downs, ref_chans = "average", exclude = eog_channels)
 ```
 
-[![*Different reference schemes. Source: Laura Leuchs, Brain Products*](https://pressrelease.brainproducts.com/wp-content/uploads/2022/01/Rereferencing_in_Analyzer_1.png)](https://pressrelease.brainproducts.com/referencing/)
+[![Different reference schemes. Source: Laura Leuchs, Brain Products](https://pressrelease.brainproducts.com/wp-content/uploads/2022/01/Rereferencing_in_Analyzer_1.png)](https://pressrelease.brainproducts.com/referencing/)
 
 ## 3.6 Filtering
 
@@ -207,14 +207,16 @@ dat_filt <- eeg_filter(dat_reref, low_freq = 0.1, high_freq = 30.0)
 >
 > ![*Aggressive filter cutoffs can create artifactual patterns in the data. Source: Tanner et al. (2015)*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4506207/bin/nihms671402f2.jpg){width="300"}
 
--   Let's save our preprocessed (that is, cleand and filtered) data for the next step:
+-   Let's save our preprocessed (that is, cleand and filtered) data for the next step[^3]
 
 ```{r, warning=FALSE}
-clean_dir <- here(bids_dir, "derivatives", "cleaned", "sub-001", "eeg")
-clean_file <- here(clean_dir, "sub-001_task-N170_desc-cleaned_eeg.set")
-dir.create(clean_dir, recursive = TRUE)
-saveRDS(dat_filt, clean_file)
+deriv_dir <- here(bids_dir, "derivatives", "eegUtils", "sub-001", "eeg")
+preproc_file <- here(deriv_dir, "sub-001_task-N170_desc-preprocessed_eeg.rds")
+dir.create(deriv_dir, recursive = TRUE)
+saveRDS(dat_filt, preproc_file)
 ```
+
+[^3]: Note that there's not yet a final standard for the organization of BIDS derivatives (that is, processed outputs produced from BIDS data). Here we'll losely follow the BIDS conventions (e.g., using a subject-specific `eeg` folder), but for time reasons we'll cut some corners (e.g., not creating `.json` metadata).
 
 ## References
 

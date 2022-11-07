@@ -1,0 +1,90 @@
+---
+title: "4. Creating epochs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{4. Creating epochs}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor: visual
+editor_options:
+  chunk_output_type: inline
+---
+
+> 🎯 **GOALS**
+>
+> -   *Learn how to load EEG data into R*
+> -   *Visually inspect the raw EEG signal*
+> -   *Understand the basics of frequency-domain filtering*
+
+## 5.1 Read epoched data
+
+```{r, message=FALSE}
+library(here)
+library(eegUtils)
+```
+
+```{r, eval=FALSE}
+bids_dir <- here("data", "n170")
+deriv_dir <- here(bids_dir, "derivatives", "eegUtils", "sub-001", "eeg")
+epoch_file <- here(deriv_dir, "sub-001_task-N170_desc-epoched_eeg.rds")
+dat_basl <- readRDS(epoch_file)
+```
+
+## 5.2 Independent component analysis
+
+```{r, eval=FALSE}
+n_components <- 15
+ica <- run_ICA(dat_basl, method = "fastica", pca = n_components)
+```
+
+```{r, eval=FALSE, message=FALSE}
+view_ica(ica)
+```
+
+```{r}
+heog <- c("HEOG_left", "HEOG_right")
+veog <- c("FP2", "VEOG_lower")
+(bad_components <- ar_eogcor(ica, dat_basl, heog, veog))
+```
+
+```{r}
+heog <- c("HEOG_left", "HEOG_right")
+veog <- c("FP2", "VEOG_lower")
+(bad_components <- ar_eogcor(ica, dat_basl, heog, veog, threshold = 0.5))
+```
+
+```{r}
+dat_icacor <- apply_ica(dat_basl, ica, comps = bad_components)
+browse_data(dat_icacor)
+```
+
+## 5.3 BESA
+
+## 5.4 Regression
+
+```{r}
+dat_eogreg <- ar_eogreg(dat_basl, heog, veog)
+browse_data(dat_eogreg) # Check Epoch #39
+```
+
+```{r, eval=FALSE}
+filt <- eeg_filter(eeg, 1, 10)
+epo <- epoch_data(filt, n170_events, time_lim = c(-0.2, 0.8))
+epo <- select_elecs(epo, c("HEOG_left", "HEOG_right", "VEOG_lower"), keep = FALSE)
+epo <- rm_baseline(epo, time_lim = c(-0.2, 0.0))
+library(ggplot2)
+plot_butterfly(epo, time_lim = c(0.0, 0.6)) +
+  theme_void() +
+  scale_color_viridis_d(option = "mako") +
+  theme(
+    aspect.ratio = 0.5,
+    panel.background = element_rect(fill = NA, color = NA),
+    legend.position = "none"
+  ) -> p
+p$layers[2:3] <- NULL
+p$layers[[1]]$aes_params$size <- 4.0
+p$layers[[1]]$aes_params$alpha <- 1.0
+p
+
+ggsave("butterfly.png")
+```
