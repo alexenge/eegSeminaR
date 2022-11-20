@@ -21,6 +21,7 @@ Imports:
     erpcore,
     hdf5r,
     here,
+    ica,
     R.matlab
 Suggests: 
     knitr,
