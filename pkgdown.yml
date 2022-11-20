@@ -2,11 +2,13 @@ pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
-  nb1-r-coding-basics: nb1-r-coding-basics.html
-  nb2-open-data: nb2-open-data.html
-  nb3-preprocessing: nb3-preprocessing.html
-  nb4-epoching: nb4-epoching.html
-last_built: 2022-11-05T16:03Z
+  cm1-r-coding-basics: cm1-r-coding-basics.html
+  cm2-open-data: cm2-open-data.html
+  cm3-preprocessing: cm3-preprocessing.html
+  cm4-creating-epochs: cm4-creating-epochs.html
+  cm5-dealing-with-artifacts: cm5-dealing-with-artifacts.html
+  eegSeminaR: eegSeminaR.html
+last_built: 2022-11-20T15:15Z
 urls:
   reference: https://alexenge.github.io/eegSeminaR/reference
   article: https://alexenge.github.io/eegSeminaR/articles
