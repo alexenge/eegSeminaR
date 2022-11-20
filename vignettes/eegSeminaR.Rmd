@@ -1,0 +1,45 @@
+---
+title: "Get started"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Get started}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor: visual
+editor_options:
+  chunk_output_type: inline
+---
+
+## Install required software
+
+-   Download recent versions of R and RStudio:
+
+|                                     |                                                                                                                                                                                                                                              |
+|--------------------------------|----------------------------------------|
+| **R** (Version 4.2.2)               | Download for [Mac (Intel)](https://cran.rstudio.com/bin/macosx/base/R-4.2.2.pkg), [Mac (M1)](https://cran.rstudio.com/bin/macosx/big-sur-arm64/base/R-4.2.2-arm64.pkg), [Windows](https://cran.rstudio.com/bin/windows/base/R-4.2.2-win.exe) |
+| **RStudio** (Version 2022.07.2-576) | Download for [Mac](https://download1.rstudio.org/desktop/macos/RStudio-2022.07.2-576.dmg), [Windows](https://download1.rstudio.org/desktop/windows/RStudio-2022.07.2-576.exe)                                                                |
+
+-   Open the downloaded files and follow the installation instructions
+
+    -   If unsure, choose all default options during the installation
+
+## Download course materials
+
+-   Download the [course materials](https://github.com/alexenge/eegSeminaR/archive/refs/heads/main.zip)
+
+-   Unzip them to a directory of your choice (e.g., in your "Documents" folder)
+
+## Working through the vignettes
+
+-   In the unzipped folder, double-click on the RStudio project (`eegSeminaR.Rproj`)
+
+-   This should open a new RStudio window
+
+-   In the "Files" pane (typically on the lower right-hand part of your screen), click on the folder `vignettes` and open the first vignette (`cm1-intro-to-r.Rmd`)
+
+## Further reading
+
+For a quick introduction to EEG and event-related potentials (ERPs), see:
+
+-   Luck, S. J. (2022). A very brief introduction to EEG and ERPs. In *Applied event-related potential data analysis*. LibreTexts. [https://socialsci.libretexts.org/Bookshelves/Psychology/Book%3A_Applied_Event-Related_Potential_Data_Analysis\_(Luck)/12%3A_Appendix_1%3A_A\_Very_Brief_Introduction_to_EEG_and_ERPs](https://socialsci.libretexts.org/Bookshelves/Psychology/Book%3A_Applied_Event-Related_Potential_Data_Analysis_(Luck)/12%3A_Appendix_1%3A_A_Very_Brief_Introduction_to_EEG_and_ERPs)
