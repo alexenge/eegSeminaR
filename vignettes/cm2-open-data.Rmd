@@ -115,7 +115,7 @@ dir.create(data_dir, recursive = TRUE)
 
     -   Only download the first of the 40 subjects for now
 
-```{r, eval=FALSE, message=FALSE}
+```{r, message=FALSE}
 erpcore::get_erpcore(
   component = "n170",
   dest_path = data_dir,
