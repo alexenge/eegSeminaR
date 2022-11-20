@@ -12,28 +12,29 @@ editor_options:
 
 > **🎯 GOALS**
 >
-> -   *Learn how to calculate in R and store the results as a variable*
-> -   *Know the most important types of data structures in R*
-> -   *Learn to use and search for functions*
-> -   *Learn how to install and use packages*
+> *Learning or re-capping the basics of writing code in the R language, including mathemtical operations, defining variables, different types of data, and using R functions and packages.*
 
 ## 1.1 Intro: Milk
 
-![](images/milk.gif)
-
--   For complex tasks, there are multiple ways to achieve the goal
+-   For complex tasks, there are multiple ways to achieve a certain goal
 
 -   Some of these ways are more effective than others
 
--   People don't always naturally gravitate towards these; they need to be taught
+-   Humans don't always naturally gravitate towards these; they often need to be taught
+
+![](images/milk.gif)
 
 ![](images/spss_r.png)
+
+***Figure:** Different ways of achieving complex tasks.*[^1]
+
+[^1]: **Sources:** [gifs.com](https://gifs.com), [University of Wisconsin-Madison](https://www.ssc.wisc.edu/sscc/pubs/spss/classintro/spss_students1.html), [Techademia](https://pages.vassar.edu/acs/r-for-data-analysis-and-graphics/rstudio-screenshot/)
 
 ## 1.2 Doing math
 
 -   Think of R like a fancy pocket calculator: You give it (numerical) inputs, it gives you an output
 
--   For example: Multiplying two numbers 🎉
+-   For example: Multiplying two numbers
 
 -   In RStudio, hit the green ▶️ symbol to run the R code and see the output below
 
@@ -41,7 +42,7 @@ editor_options:
 42 * 2
 ```
 
-> **✍️ EXERCISE 1.2**
+> **✍️ EXERCISE**
 >
 > *Check the current temperature for Berlin on the internet. Then use R to convert it from degrees Celsius to degrees Fahrenheit. The formula is:* $\text{°C}\times1.8+32$
 >
@@ -53,21 +54,21 @@ editor_options:
 
 ## 1.3 Variables
 
--   The real power of programming languages: Storing the output of a computation as an intermediate result (**variable**) that can be reused for thex computation
+-   The real power of programming languages: Storing the output of a computation as an intermediate result (**variable**) that can be reused for the next computation
 
--   We assign (define/create) a variable by choosing a custom name (here: `my_var`) and an arrow symbol (`<-`)
+-   We assign (define, create) a variable by choosing a custom name (here: `my_var`) and an arrow symbol (`<-`)
 
 ```{r}
 my_var <- 4 + 4
 ```
 
--   Show the current value of a variable:
+-   To show the current value of a variable:
 
 ```{r}
 my_var
 ```
 
--   Or assign *and* show the variable by putting the assignment in parentheses:
+-   Or both assign *and* show the variable at once, using parentheses:
 
 ```{r}
 (my_other_var <- 3 * 2)
@@ -79,7 +80,7 @@ my_var
 my_var ^ 2
 ```
 
-> **✍️ EXERCISE 1.2**
+> **✍️ EXERCISE**
 >
 > *Re-do the temperature calculation from Exercise 1.1, but this time storing the temperatures in two separate variables.*
 
@@ -110,13 +111,13 @@ degrees_celsius <- ...
 TRUE
 ```
 
--   To check the value of a variable (here `my_var`, defined above):
+-   To check the type of a variable (here `my_var`, defined above):
 
 ```{r}
 class(my_var)
 ```
 
--   We often want to want to store not just a single value (number, string, etc.) but multiple ones
+-   We often want to store not just a single value (number, string, etc.) but multiple ones
 
 -   **`vector`**: A list of elements, where all elements are *of the same type*
 
@@ -129,7 +130,7 @@ c(1, 5, 8, 21)
 -   **`data.frame`**: A table, that is, a two-dimensional structure with rows and columns
     -   Each column is a vector
 
-    -   Each column should be given a name (the part before the `=` sign)
+    -   Each column should be given a name (the part before the equals sign)
 
 ```{r}
 data.frame(
@@ -140,13 +141,13 @@ data.frame(
 ```
 
 -   **`list`**: A list of elements, where the elements can be of different types
-    -   Extremely powerful because arbitrarily complex (e.g., a list of data frames, a list of lists)
+    -   Extremely powerful (e.g., a list of data frames, a list of lists)
 
 ```{r}
 list("Hello world!", 42, c("Vector", "inside", "a", "list!"))
 ```
 
-> **✍️ EXERCISE 1.3**
+> **✍️ EXERCISE**
 >
 > *As a group, create one vector with your names and another vector with your heights (in cm). Combine these two vectors into a data frame.*
 
@@ -170,7 +171,7 @@ my_vector <- c(2, 3, 5, 7, 11, 13, 17, 19, 23)
 my_vector[5]
 ```
 
--   A **range of indices** (e.g., 2nd to 4th) or **vector of indices** (e.g., first and third) selects multiple elements
+-   A **range of indices** (e.g., 2nd to 4th) or **vector of indices** (e.g., 1st and 3rd) selects multiple elements
 
 ```{r}
 my_vector[2:4]
@@ -201,20 +202,45 @@ universities[2, ]
 ```
 
 -   Select **a single column** (i.e., vector) with a dollar sign (`$`) and the column name
+    -   Note that this returns a vector
 
 ```{r}
 universities$established
 ```
 
--   Again, we can extract only records (rows) that fulfill a certain **logical condition**
+-   Again, we can select only records (rows) that fulfill a certain **logical condition**
 
 ```{r}
 universities[universities$students_k > 20, ]
 ```
 
-> **✍️ EXERCISE 1.4**
+> **✍️ EXERCISE**
 >
-> *TBD*
+> *The data frame `ToothGrowth` is a dataset built into R. It contains the measured length of the teeth (column `len`) of 60 guinea pigs after receiving different doses of Vitamin C (column `dose`). The vitamin C was delivered either via ascorbic acid (value `"VC"` in column `supp`) or via orange juice (value `"OJ"`).*
+
+```{r}
+head(ToothGrowth)
+```
+
+> *Extract the vector of tooth lengths for all guinea pigs that received 2 milligrams (the maximum dose) of vitamin C and via orange juice.*
+
+```{r, eval=FALSE}
+(tooth_lengths <- ToothGrowth[... & ..., ]$...)
+```
+
+> <details>
+>
+> <summary>💡 **NOTE: Welcome to the Tidyverse**</summary>
+>
+> *There's a very popular set of R packages called the "tidyverse"*[^2]*, which includes many functions designed to make the processing of (tabular) data in R easier (note that you'll learn more about R functions and packages below). The result is code that is often a lot more readable.*
+>
+> *For example, here's the usual "base" R expression for extracting a vector from a dataframe based on a certain condition is: `universities[universities$students_k > 20, ]$city`. The corresponding tidiverse version looks like this: `universities %>% filter(students_k > 20) %>% pull(city)`.*
+>
+> *For simplicity, we'll mostly stick to base R functions and syntax for the remainder of the course -- but you'll surely encounter many useful tidyverse functions and examples as you become a more advanced R programmer.*
+>
+> </details>
+
+[^2]: Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D. P., Spinu, V., ... Yutani, H. (2019). Welcome to the tidyverse. *Journal of Open Source Software*, *4*(43), 1686. <https://doi.org/10.21105/joss.01686>
 
 ## 1.5 Functions
 
@@ -237,21 +263,21 @@ mean(my_vector)
 
     -   Each argument has the form of `argument_name = value`
 
-    -   The first argument of a function is often the data; it's common to leave its argument name out (making it a *positional* argument)
+    -   The first argument of a function is often the data; it's common to leave its name out (making it a *positional* argument)
 
-    -   Arguments are separated from another by commas
-
-<!-- -->
+    -   Arguments are separated from each other by commas
 
 -   The **return value** is the output that the function gives back to us
 
-> **✍️ EXERCISE 1.5**
+> **✍️ EXERCISE**
 >
 > *Intuitively, one might have thought that the way to compute the mean of four numbers would be `mean(2, 4, 6, 8)`. Why doesn't this work?*
 
-> 💡 **NOTE: R can be confusing**
+> <details>
 >
-> *While not the case for `mean()`, some functions* do *actually take an arbitrary number of positional arguments. An example is `paste()`, which pastes together multiple character strings into one long character string.*
+> <summary>💡 **NOTE: R can be confusing**</summary>
+>
+> *While not the case for `mean()`, some functions indeed do take an arbitrary number of positional arguments. An example is `paste()`, which pastes together multiple character strings into one long character string.*
 >
 > *You can check the help file of a function (more on that below) to see if a function behaves like `mean()`, with a single first element (typically called `x`), or like `paste()`, with an arbitrary number of positional input arguments (indicated by `...` in the help file).*
 
@@ -271,7 +297,7 @@ help(mean)
 
 -   But note that this only helps when you know (part of) the function name -- if not, try to ask Google (e.g., "averaging numbers in R")
 
-> **✍️ EXERCISE 1.6**
+> **✍️ EXERCISE**
 >
 > *Find out the R function to create a vector of random numbers from a normal distribution. Once you know the name of the function, use it to create a vector of 100 numbers with a mean 500 and a standard deviation of 50.*
 
@@ -294,7 +320,7 @@ install.packages("cowsay")
 -   Next we load the package -- this needs to be done every time we restart our R session
 
 ```{r}
-library(cowsay)
+library("cowsay")
 ```
 
 -   Finally, we can use one of the functions from the package:
@@ -303,7 +329,7 @@ library(cowsay)
 say("What a cool function!")
 ```
 
--   We can also skip the `library(package_name)` step by directly specifying the package of the function:
+-   We can also skip the `library("package_name")` step and directly specify the package of the function:
 
 ```{r}
 cowsay::say("This also works!", by = "cow")
@@ -319,7 +345,7 @@ cowsay::say("This also works!", by = "cow")
 
 ### 1.8 Custom functions
 
--   In addition to the function in base R and published packages, we can write our own ones:
+-   In addition to the functions in base R and published packages, we can write our own function(s):
 
 ```{r}
 say_dude <- function(what, by = "cat") {
@@ -329,15 +355,15 @@ say_dude <- function(what, by = "cat") {
 say_dude("Nice function")
 ```
 
--   Simple functions like this can also be defined on one line:
+-   Short functions like this can also be defined on a single line:
 
 ```{r}
 say_dude <- function(what, by = "cat") cowsay::say(paste0(what, ", dude!"))
 ```
 
-> **✍️ EXERCISE 1.9**
+> **✍️ EXERCISE**
 >
-> *Write a custom function that implements the Celsius-to-Fahrenheit conversion from Exercise 1.1.*
+> *Write a custom function that implements the Celsius-to-Fahrenheit conversion from Section 1.1.*
 
 ```{r, eval=FALSE}
 celsius_to_fahrenheit <- ...
@@ -346,11 +372,9 @@ celsius_to_fahrenheit(19.3)
 
 ### 1.9 Repeating stuff
 
--   We often want to repeat the same operation on multiple inputs
+-   We often want to **repeat the same operation** on multiple inputs
 
--   Let's assume we have a couple of friends and want to create a friendly message for each of them
-
-<!-- -->
+-   Let's assume we have a couple of friends and want to create a friendly message for each of them (stored in a vector or list)
 
 -   The naive approach:
 

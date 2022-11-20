@@ -12,7 +12,7 @@ Description: This is a MSc-level university seminar that covers the basics of an
     EEG data in R. It uses the openly available ERP CORE dataset (Kappenman et al.,
     2021, NeuroImage) to illustrate various aspects of loading, preprocessing,
     visualization, and statistical analysis of the data. 
-License: CC BY 4.0
+License: CC BY 4.0 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
@@ -29,4 +29,5 @@ Remotes:
     craddm/eegUtils,
     alexenge/erpcore
 VignetteBuilder: knitr
-URL: https://alexenge.github.io/eegSeminaR/
+URL: https://github.com/alexenge/eegSeminaR, https://alexenge.github.io/eegSeminaR/
+BugReports: https://github.com/alexenge/eegSeminaR/issues
