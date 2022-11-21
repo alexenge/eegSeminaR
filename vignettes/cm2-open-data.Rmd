@@ -1,5 +1,6 @@
 ---
 title: "2. Open data"
+date: "2022-11-29"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{2. Open data}
@@ -16,15 +17,15 @@ editor_options:
 
 ## 2.1 Research we can trust
 
-![](images/crisis.png "The replication crisis in psychology. Source: Harvard University"){alt="The replication crisis in psychology. Source: Harvard University" fig-align="center" width="300"}
+![](images/crisis.png){width="300"}
 
-***Figure 2.1a** The replication crisis in psychology.*[^1]
+***Figure:** The replication crisis in psychology.*[^1]
 
 -   We want (psychological) research findings to be trustworthy
 
 -   At the very least, other researchers that repeat an experiment or analysis should be able to get the same results
 
-![](images/reproducible.jpg "Terminology for trustworthy research. Source: The Turing Way"){width="500"}
+![](images/reproducible.jpg){width="500"}
 
 ***Figure:** Terminology for trustworthy research.*[^2]
 
@@ -38,29 +39,29 @@ editor_options:
 
 ## 2.2 Open research data
 
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| Advantages of Open Data                                                | Disadvantages of Open Data                                  |
-+========================================================================+=============================================================+
-| -   Others can reproduce your analysis                                 | -   Privacy concerns -\> Informed consent, pseudonymization |
-|                                                                        |                                                             |
-| -   Others can probe the robustness of your results                    | -   Additional effort in preparing and documenting the data |
-|                                                                        |                                                             |
-| -   Others can analyze their own research questions                    | -   Fear of getting "scooped"                               |
-|                                                                        |                                                             |
-| -   Others can use it for methods development or teaching              |                                                             |
-|                                                                        |                                                             |
-| -   You have a (well-documented) backup of the data                    |                                                             |
-|                                                                        |                                                             |
-| -   You will get cited when others use your data                       |                                                             |
-|                                                                        |                                                             |
-| -   Study participants and taxpayers get more for their time and money |                                                             |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
++------------------------------------------------------------------------+---------------------------------------------------------------+
+| Advantages of Open Data                                                | Disadvantages of Open Data                                    |
++========================================================================+===============================================================+
+| -   Others can reproduce your analysis                                 | -   Privacy concerns **→** Informed consent, pseudonymization |
+|                                                                        |                                                               |
+| -   Others can probe the robustness of your results                    | -   Additional effort in preparing and documenting the data   |
+|                                                                        |                                                               |
+| -   Others can analyze their own research questions                    | -   Fear of getting "scooped"                                 |
+|                                                                        |                                                               |
+| -   Others can use it for methods development or teaching              |                                                               |
+|                                                                        |                                                               |
+| -   You have a (well-documented) backup of the data                    |                                                               |
+|                                                                        |                                                               |
+| -   You will get cited when others use your data                       |                                                               |
+|                                                                        |                                                               |
+| -   Study participants and taxpayers get more for their time and money |                                                               |
++------------------------------------------------------------------------+---------------------------------------------------------------+
 
 ## 2.3 Standardizing data
 
 -   **Brain Imaging Data Standard (BIDS)** = a standardized way of organizing neuroimaging (e.g., fMRI, EEG) data for easier sharing and reuse
 
-![](images/bids.png "Example EEG dataset in BIDS format. Source: Scientific Data")
+![](images/bids.png){width="600"}
 
 ***Figure:** Example EEG dataset in BIDS format.*[^3]
 
@@ -107,15 +108,15 @@ editor_options:
 dir.create(data_dir, recursive = TRUE)
 ```
 
--   Then actually download the ERP CORE data
+-   Then actually download the ERP CORE data:
 
-    -   `"n170"` to get only the data from the face percetion (N170) experiment
+    -   `component = "n170"` to get only the data from the face percetion (N170) experiment
 
-    -   `"bids"` type to get data in BIDS format
+    -   `type = "bids"` type to get data in BIDS format
 
     -   Only download the first of the 40 subjects for now
 
-```{r, message=FALSE}
+```{r, message=FALSE, results="hide"}
 erpcore::get_erpcore(
   component = "n170",
   dest_path = data_dir,
@@ -134,9 +135,9 @@ erpcore::get_erpcore(
 
 -   Gewin, V. (2016). Data sharing: An open mind on open data. *Nature*, *529*(7584), Article 7584. <https://doi.org/10.1038/nj7584-117a>
 
--   Kathawalla, U.-K., Silverstein, P., & Syed, M. (2021). Easing into open science: A guide for graduate students and their advisors. *Collabra: Psychology*, *7*(1). <https://doi.org/10.1525/collabra.18684>
+-   Kathawalla, U.-K., Silverstein, P., & Syed, M. (2021). Easing into Open Science: A guide for graduate students and their advisors. *Collabra: Psychology*, *7*(1). <https://doi.org/10.1525/collabra.18684>
 
--   Pernet, C. R., Appelhoff, S., Gorgolewski, K. J., Flandin, G., Phillips, C., Delorme, A., & Oostenveld, R. (2019). EEG-BIDS, an extension to the brain imaging data structure for electroencephalography. *Scientific Data*, *6*(1), Article 1. <https://doi.org/10.1038/s41597-019-0104-8>
+-   Pernet, C. R., Appelhoff, S., Gorgolewski, K. J., Flandin, G., Phillips, C., Delorme, A., & Oostenveld, R. (2019). EEG-BIDS, an extension to the Brain Imaging Data Structure for electroencephalography. *Scientific Data*, *6*(1), Article 1. <https://doi.org/10.1038/s41597-019-0104-8>
 
 ## Add-on topics
 
@@ -160,13 +161,13 @@ erpcore::get_erpcore(
 
     5.  Try out new stuff while always being able to revert to any previous commit
 
-![](images/git_branches.png){width="500"}
+![](images/git_branches.png){width="400"}
 
 ***Figure:** Tracking the history of your code using git commits (circles) and branches (arrows)*[^7]
 
 -   Code in git repositories can be shared online on websites like GitHub or GitLab
 
--   For an intro to git and how to use it together with RStudio, check out this free online book[^8]
+-   Details are beyond the scope of this course, but for a great intro see ["Happy git with R"](https://happygitwithr.com/)[^8]
 
 [^7]: **Source:** [The Turing Way](https://the-turing-way.netlify.app/reproducible-research/vcs/vcs-workflow.html)
 

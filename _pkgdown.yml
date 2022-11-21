@@ -13,8 +13,8 @@ navbar:
     articles:
       text: Course materials
       menu:
-      - text: "1. R coding basics"
-        href: articles/cm1-r-coding-basics.html
+      - text: "1. Introduction to R"
+        href: articles/cm1-introduction-to-r.html
       - text: "2. Open data"
         href: articles/cm2-open-data.html
 footer:

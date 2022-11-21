@@ -1,8 +1,9 @@
 ---
-title: "1. R coding basics"
+title: "1. Introduction to R"
+date: "2022-11-29"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{1. R coding basics}
+  %\VignetteIndexEntry{1. Introduction to R}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor: visual

@@ -22,7 +22,7 @@ editor_options:
 
 -   Open the downloaded files and follow the installation instructions
 
-    -   If unsure, choose all default options during the installation
+    -   If unsure, leave default options untouched
 
 ## Download course materials
 
@@ -30,16 +30,16 @@ editor_options:
 
 -   Unzip them to a directory of your choice (e.g., in your "Documents" folder)
 
-## Working through the vignettes
+## Open the course materials
 
--   In the unzipped folder, double-click on the RStudio project (`eegSeminaR.Rproj`)
+-   In the unzipped folder, double-click on the RStudio project file (`eegSeminaR.Rproj`)
 
 -   This should open a new RStudio window
 
--   In the "Files" pane (typically on the lower right-hand part of your screen), click on the folder `vignettes` and open the first vignette (`cm1-intro-to-r.Rmd`)
+-   In the "Files" pane (typically on the lower right-hand part of your screen), click on the folder `vignettes` and open the first vignette (`cm1-introduction-to-r.Rmd`)
 
 ## Further reading
 
-For a quick introduction to EEG and event-related potentials (ERPs), see:
+For some quick background info on EEG and event-related potentials (ERPs), see:
 
--   Luck, S. J. (2022). A very brief introduction to EEG and ERPs. In *Applied event-related potential data analysis*. LibreTexts. [https://socialsci.libretexts.org/Bookshelves/Psychology/Book%3A_Applied_Event-Related_Potential_Data_Analysis\_(Luck)/12%3A_Appendix_1%3A_A\_Very_Brief_Introduction_to_EEG_and_ERPs](https://socialsci.libretexts.org/Bookshelves/Psychology/Book%3A_Applied_Event-Related_Potential_Data_Analysis_(Luck)/12%3A_Appendix_1%3A_A_Very_Brief_Introduction_to_EEG_and_ERPs)
+-   Luck, S. J. (2022). A very brief introduction to EEG and ERPs. In *Applied event-related potential data analysis*. LibreTexts. [Link](https://socialsci.libretexts.org/Bookshelves/Psychology/Book%3A_Applied_Event-Related_Potential_Data_Analysis_(Luck)/12%3A_Appendix_1%3A_A_Very_Brief_Introduction_to_EEG_and_ERPs)
