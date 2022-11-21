@@ -54,7 +54,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-course-materials">Course materials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-course-materials">
-    <a class="dropdown-item" href="articles/cm1-r-coding-basics.html">1. R coding basics</a>
+    <a class="dropdown-item" href="articles/cm1-introduction-to-r.html">1. Introduction to R</a>
     <a class="dropdown-item" href="articles/cm2-open-data.html">2. Open data</a>
   </div>
 </li>
@@ -82,8 +82,123 @@
 <img src="logo.png" class="logo" alt=""><h1 id="eegseminar-">eegSeminaR <a class="anchor" aria-label="anchor" href="#eegseminar-"></a>
 </h1>
 </div>
-<p>A university seminar on analyzing EEG data in R</p>
+<div class="section level2">
+<h2 id="id_-welcome">👋 Welcome<a class="anchor" aria-label="anchor" href="#id_-welcome"></a>
+</h2>
+<p>This is a MSc-level university seminar on analyzing EEG data in R. It follows a “code first” approach (using the R package <code>eegUtils</code><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Craddock, M. (2022). &lt;em&gt;eegUtils: Utilities for electroencephalographic (EEG) analysis&lt;/em&gt; (0.7.0). &lt;a href="https://craddm.github.io/eegUtils" class="external-link uri"&gt;https://craddm.github.io/eegUtils&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a>) to teach the basics of event-related potentials (ERP) analysis, from raw data to statistical modeling and visualization.</p>
+<hr>
 </div>
+<div class="section level2">
+<h2 id="id_️-how-to-follow-along">⚙️ How to follow along<a class="anchor" aria-label="anchor" href="#id_%EF%B8%8F-how-to-follow-along"></a>
+</h2>
+<div class="section level3">
+<h3 id="a-interactive--local-recommended">a) Interactive – local (recommended)<a class="anchor" aria-label="anchor" href="#a-interactive--local-recommended"></a>
+</h3>
+<ul>
+<li>Follow the instructions on the <a href="https://alexenge.github.io/eegSeminaR/articles/eegSeminaR.html">“Get started”</a> page to download and install the required software</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="b-interactive--cloud-server">b) Interactive – cloud server<a class="anchor" aria-label="anchor" href="#b-interactive--cloud-server"></a>
+</h3>
+<ul>
+<li><p>Hit this link (or the “Launch binder” button at the top) to open the course materials on a cloud server kindly provided by the Binder project</p></li>
+<li><p>Note that: (a) Launching the cloud server might take a couple of minutes, (b) resources (CPUs and memory) are limited, and (c) changes you make to the code will be lost at the end of the session</p></li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="c-static">c) Static<a class="anchor" aria-label="anchor" href="#c-static"></a>
+</h3>
+<ul>
+<li><p>Read through a static version of the <a href="https://alexenge.github.io/eegSeminaR/articles/cm1-r-coding-basics.html">course materials</a> from your web browser</p></li>
+<li><p>Does not allow you to run and/or modify any of the code</p></li>
+</ul>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="id_-course-content">🧭 Course content<a class="anchor" aria-label="anchor" href="#id_-course-content"></a>
+</h2>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="6%">
+<col width="57%">
+<col width="35%">
+</colgroup>
+<thead><tr class="header">
+<th>Session</th>
+<th>Vignettes</th>
+<th>Homework</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>29.11.2022</td>
+<td><ol style="list-style-type: decimal">
+<li>
+<a href="https://alexenge.github.io/eegSeminaR/articles/cm1-r-coding-basics.html"><strong>Intro to R</strong></a>: Variables, data types, functions, packages</li>
+<li>
+<a href="https://alexenge.github.io/eegSeminaR/articles/cm2-open-data.html"><strong>Open data</strong></a>: Data sharing, BIDS standard, ERP CORE dataset</li>
+</ol></td>
+<td><ul>
+<li>Choose + download the data from your ERP CORE experiment</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>06.12.2022</td>
+<td><ol start="3" style="list-style-type: decimal">
+<li>
+<strong>Preprocessing</strong>: Loading and viewing data, re-referencing, filtering</li>
+<li>
+<strong>Creating epochs</strong>: Event codes, epoching, baseline correction</li>
+</ol></td>
+<td><ul>
+<li>Apply preprocessing and epoching to your data</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>13.12.2022</td>
+<td><ol start="5" style="list-style-type: decimal">
+<li>
+<strong>Correcting artifacts</strong>: ICA, BESA, voltage thresholds</li>
+<li>
+<strong>Extracting amplitudes</strong>: Selecting time windows and regions of interest</li>
+</ol></td>
+<td><ul>
+<li>Apply artifact correction and/or rejection; extract single trial ERP amplitudes</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Happy christmas holidays! 🎅🎁🎄</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>03.01.2023</td>
+<td><ol start="7" style="list-style-type: decimal">
+<li>
+<strong>Statistics</strong>: ANOVA, mixed models, permutation tests</li>
+<li>
+<strong>Visualization</strong>: time course, topography</li>
+</ol></td>
+<td><ul>
+<li>Create at least one statistical model and plot; upload report on Moodle</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Add-on topics</td>
+<td><ol start="9" style="list-style-type: decimal">
+<li><strong>Source localization</strong></li>
+<li><strong>Time-frequency analysis</strong></li>
+<li><strong>Multivariate analysis (decoding)</strong></li>
+</ol></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
