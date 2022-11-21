@@ -108,7 +108,14 @@ editor_options:
 dir.create(data_dir, recursive = TRUE)
 ```
 
--   Then actually download the ERP CORE data:
+-   `erpcore` package is still in development → Must be installed from GitHub instead of CRAN
+
+```{r, eval=FALSE}
+install.packages("remotes")
+remotes::install_github("alexenge/erpcore")
+```
+
+-   Download the ERP CORE data using `erpcore`:
 
     -   `component = "n170"` to get only the data from the face percetion (N170) experiment
 
