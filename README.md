@@ -41,6 +41,6 @@ The code examples draw heavily on the `eegUtils` package.[^readme-1]
 
 ### c) Static
 
--   Read through a static version of the [course contents ("vignettes")](https://alexenge.github.io/eegSeminaR/articles/v1-r-coding-basics.html) from your web browser
+-   Read through a static version of the [course contents ("vignettes")](https://alexenge.github.io/eegSeminaR/articles/v1-introduction-to-r.html) from your web browser
 
 -   Does not allow you to run and/or modify any of the code
