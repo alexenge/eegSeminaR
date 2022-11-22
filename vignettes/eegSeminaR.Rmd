@@ -30,7 +30,7 @@ editor_options:
 
 -   Unzip them to a directory of your choice (e.g., in your "Documents" folder)
 
-## Open the course materials
+## Open course materials
 
 -   In the unzipped folder, double-click on the RStudio project file (`eegSeminaR.Rproj`)
 
