@@ -2,10 +2,10 @@ pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
-  cm1-introduction-to-r: cm1-introduction-to-r.html
-  cm2-open-data: cm2-open-data.html
   eegSeminaR: eegSeminaR.html
-last_built: 2022-11-22T15:15Z
+  v1-introduction-to-r: v1-introduction-to-r.html
+  v2-open-data: v2-open-data.html
+last_built: 2022-11-22T17:45Z
 urls:
   reference: https://alexenge.github.io/eegSeminaR/reference
   article: https://alexenge.github.io/eegSeminaR/articles

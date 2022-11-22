@@ -7,16 +7,16 @@
     <loc>https://alexenge.github.io/eegSeminaR/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://alexenge.github.io/eegSeminaR/articles/cm1-introduction-to-r.html</loc>
-  </url>
-  <url>
-    <loc>https://alexenge.github.io/eegSeminaR/articles/cm2-open-data.html</loc>
-  </url>
-  <url>
     <loc>https://alexenge.github.io/eegSeminaR/articles/eegSeminaR.html</loc>
   </url>
   <url>
     <loc>https://alexenge.github.io/eegSeminaR/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://alexenge.github.io/eegSeminaR/articles/v1-introduction-to-r.html</loc>
+  </url>
+  <url>
+    <loc>https://alexenge.github.io/eegSeminaR/articles/v2-open-data.html</loc>
   </url>
   <url>
     <loc>https://alexenge.github.io/eegSeminaR/authors.html</loc>

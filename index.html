@@ -52,10 +52,10 @@
   <a class="nav-link" href="articles/eegSeminaR.html">Get started</a>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-course-materials">Course materials</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-course-materials">
-    <a class="dropdown-item" href="articles/cm1-introduction-to-r.html">1. Introduction to R</a>
-    <a class="dropdown-item" href="articles/cm2-open-data.html">2. Open data</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-course-contents">Course contents</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-course-contents">
+    <a class="dropdown-item" href="articles/v1-introduction-to-r.html">1. Introduction to R</a>
+    <a class="dropdown-item" href="articles/v2-open-data.html">2. Open data</a>
   </div>
 </li>
       </ul>
@@ -82,6 +82,7 @@
 <img src="logo.png" class="logo" alt=""><h1 id="eegseminar-">eegSeminaR <a class="anchor" aria-label="anchor" href="#eegseminar-"></a>
 </h1>
 </div>
+
 <div class="section level2">
 <h2 id="id_-welcome">👋 Welcome<a class="anchor" aria-label="anchor" href="#id_-welcome"></a>
 </h2>
@@ -90,13 +91,13 @@
 <hr>
 </div>
 <div class="section level2">
-<h2 id="id_-course-content">🧭 Course content<a class="anchor" aria-label="anchor" href="#id_-course-content"></a>
+<h2 id="id_-course-contents">🧭 Course contents<a class="anchor" aria-label="anchor" href="#id_-course-contents"></a>
 </h2>
 <table class="table">
 <colgroup>
-<col width="4%">
-<col width="65%">
-<col width="29%">
+<col width="15%">
+<col width="39%">
+<col width="45%">
 </colgroup>
 <thead><tr class="header">
 <th>Session</th>
@@ -105,29 +106,29 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>29.11.2022</td>
+<td>2022-11-29</td>
 <td>
-<a href="https://alexenge.github.io/eegSeminaR/articles/cm1-introduction-to-r.html">1. Introduction to R</a><br><a href="https://alexenge.github.io/eegSeminaR/articles/cm2-open-data.html">2. Open data</a>
+<a href="https://alexenge.github.io/eegSeminaR/articles/v1-introduction-to-r.html">1. Introduction to R</a><br><a href="https://alexenge.github.io/eegSeminaR/articles/v2-open-data.html">2. Open data</a>
 </td>
 <td>Choose ERP CORE experiment<br>Download ERP CORE data</td>
 </tr>
 <tr class="even">
-<td>06.12.2022</td>
+<td>2022-12-06</td>
 <td>3. Preprocessing<br>4. Creating epochs</td>
 <td>Apply preprocessing to your data<br>Create epochs</td>
 </tr>
 <tr class="odd">
-<td>13.12.2022</td>
+<td>2022-12-13</td>
 <td>5. Correcting artifacts<br>6. Extracting amplitudes</td>
 <td>Apply artifact correction and/or rejection<br>Extract single trial ERP amplitudes</td>
 </tr>
 <tr class="even">
 <td></td>
-<td>Happy christmas holidays! 🎅🎁🎄</td>
+<td>Happy Christmas holidays! 🎅🎁🎄</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>03.01.2023</td>
+<td>2023-01-03</td>
 <td>7. Statistics<br>8. Visualization</td>
 <td>Create at least one statistical model and plot<br>Upload report to Moodle</td>
 </tr>
@@ -154,7 +155,7 @@
 <h3 id="b-interactive--cloud-server">b) Interactive – cloud server<a class="anchor" aria-label="anchor" href="#b-interactive--cloud-server"></a>
 </h3>
 <ul>
-<li><p>Hit this link (or the “Launch binder” button at the top) to open the course materials on a cloud server kindly provided by the Binder project</p></li>
+<li><p>Hit <a href="https://mybinder.org/v2/gh/alexenge/eegSeminaR/HEAD?urlpath=rstudio" class="external-link">this link</a> (or the “Launch binder” button) to open the course materials on a cloud server kindly provided by the Binder project</p></li>
 <li><p>Note that: (a) Launching the cloud server might take a couple of minutes, (b) resources (CPUs and memory) are limited, and (c) changes you make to the code will be lost at the end of the session</p></li>
 </ul>
 </div>
@@ -162,7 +163,7 @@
 <h3 id="c-static">c) Static<a class="anchor" aria-label="anchor" href="#c-static"></a>
 </h3>
 <ul>
-<li><p>Read through a static version of the <a href="https://alexenge.github.io/eegSeminaR/articles/cm1-r-coding-basics.html">course materials</a> from your web browser</p></li>
+<li><p>Read through a static version of the <a href="https://alexenge.github.io/eegSeminaR/articles/v1-r-coding-basics.html">course contents (“vignettes”)</a> from your web browser</p></li>
 <li><p>Does not allow you to run and/or modify any of the code</p></li>
 </ul>
 </div>
@@ -202,7 +203,14 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://mybinder.org/v2/gh/alexenge/eegSeminaR/HEAD?urlpath=rstudio" class="external-link"><img src="https://mybinder.org/badge_logo.svg" alt="Launch Binder"></a></li>
+<li><a href="http://www.repostatus.org/#wip" class="external-link"><img src="http://www.repostatus.org/badges/latest/wip.svg" alt="Repo Status"></a></li>
+<li><a href="https://github.com/alexenge/eegSeminaR/actions" class="external-link"><img src="https://img.shields.io/github/workflow/status/alexenge/eegSeminaR/pkgdown" alt="GitHub Workflow Status"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
