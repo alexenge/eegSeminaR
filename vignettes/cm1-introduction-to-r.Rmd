@@ -83,7 +83,7 @@ my_var ^ 2
 
 > **✍️ EXERCISE**
 >
-> *Re-do the temperature calculation from Exercise 1.1, but this time storing the temperatures in two separate variables.*
+> *Re-do the temperature calculation from the previous exercise, but this time storing the temperatures in two separate variables.*
 
 ```{r, eval=FALSE}
 degrees_celsius <- ...
@@ -129,7 +129,7 @@ c(1, 5, 8, 21)
 ```
 
 -   **`data.frame`**: A table, that is, a two-dimensional structure with rows and columns
-    -   Each column is a vector
+    -   Each column is a vector, each row is from the same sample (e.g., participant, trial)
 
     -   Each column should be given a name (the part before the equals sign)
 
@@ -235,7 +235,7 @@ head(ToothGrowth)
 >
 > *There's a very popular set of R packages called the "tidyverse"*[^2]*, which includes many functions designed to make the processing of (tabular) data in R easier (note that you'll learn more about R functions and packages below). The result is code that is often a lot more readable.*
 >
-> *For example, here's the usual "base" R expression for extracting a vector from a dataframe based on a certain condition is: `universities[universities$students_k > 20, ]$city`. The corresponding tidiverse version looks like this: `universities %>% filter(students_k > 20) %>% pull(city)`.*
+> *For example, here's the usual "base" R expression for extracting a vector from a dataframe based on a certain condition: `universities[universities$students_k > 20, ]$city`. The corresponding tidyverse code looks like this: `universities %>% filter(students_k > 20) %>% pull(city)`.*
 >
 > *For simplicity, we'll mostly stick to base R functions and syntax for the remainder of the course -- but you'll surely encounter many useful tidyverse functions and examples as you become a more advanced R programmer.*
 >
@@ -260,11 +260,11 @@ mean(my_vector)
 
 -   Each function has a unique **name**
 
--   **Arguments** of the functions are the inputs that we want the function to do something with
+-   **Arguments** are the inputs that we want the function to do something with
 
     -   Each argument has the form of `argument_name = value`
 
-    -   The first argument of a function is often the data; it's common to leave its name out (making it a *positional* argument)
+    -   The first argument of a function is often the data -- it's common to leave its name out (making it a *positional* argument)
 
     -   Arguments are separated from each other by commas
 
@@ -364,7 +364,7 @@ say_dude <- function(what, by = "cat") cowsay::say(paste0(what, ", dude!"))
 
 > **✍️ EXERCISE**
 >
-> *Write a custom function that implements the Celsius-to-Fahrenheit conversion from Section 1.1.*
+> *Write a custom function that implements the Celsius-to-Fahrenheit conversion from Section 1.2.*
 
 ```{r, eval=FALSE}
 celsius_to_fahrenheit <- ...

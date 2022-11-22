@@ -39,23 +39,23 @@ editor_options:
 
 ## 2.2 Open research data
 
-+------------------------------------------------------------------------+---------------------------------------------------------------+
-| Advantages of Open Data                                                | Disadvantages of Open Data                                    |
-+========================================================================+===============================================================+
-| -   Others can reproduce your analysis                                 | -   Privacy concerns **→** Informed consent, pseudonymization |
-|                                                                        |                                                               |
-| -   Others can probe the robustness of your results                    | -   Additional effort in preparing and documenting the data   |
-|                                                                        |                                                               |
-| -   Others can analyze their own research questions                    | -   Fear of getting "scooped"                                 |
-|                                                                        |                                                               |
-| -   Others can use it for methods development or teaching              |                                                               |
-|                                                                        |                                                               |
-| -   You have a (well-documented) backup of the data                    |                                                               |
-|                                                                        |                                                               |
-| -   You will get cited when others use your data                       |                                                               |
-|                                                                        |                                                               |
-| -   Study participants and taxpayers get more for their time and money |                                                               |
-+------------------------------------------------------------------------+---------------------------------------------------------------+
++------------------------------------------------------------------------+-------------------------------------------------------------+
+| Advantages of Open Data                                                | Disadvantages of Open Data                                  |
++========================================================================+=============================================================+
+| -   Others can reproduce your analysis                                 | -   Privacy concerns → Informed consent, pseudonymization   |
+|                                                                        |                                                             |
+| -   Others can probe the robustness of your results                    | -   Additional effort in preparing and documenting the data |
+|                                                                        |                                                             |
+| -   Others can analyze their own research questions                    | -   Fear of getting "scooped"                               |
+|                                                                        |                                                             |
+| -   Others can use it for methods development or teaching              |                                                             |
+|                                                                        |                                                             |
+| -   You have a (well-documented) backup of the data                    |                                                             |
+|                                                                        |                                                             |
+| -   You will get cited when others use your data                       |                                                             |
+|                                                                        |                                                             |
+| -   Study participants and taxpayers get more for their time and money |                                                             |
++------------------------------------------------------------------------+-------------------------------------------------------------+
 
 ## 2.3 Standardizing data
 
@@ -67,7 +67,7 @@ editor_options:
 
 -   Folders organized by subjects (`sub-001/`, `sub-002/`, etc.), session (`ses-01`, `ses-02`, etc., if applicable) and imaging modality (`T1w` -- structural MRI, `func` -- functional MRI, `eeg` -- EEG recordings, etc.)
 
--   Raw data files (e.g., `.set`/`.fdt` for EEG) are accompanied by metadata (e.g., in `.json` format)
+-   Raw data files (e.g., `.set`/`.fdt` for EEG) are accompanied by metadata in `.json` format
 
     -   Meta-data contains info about the task, the scanner, etc.
 
@@ -85,11 +85,11 @@ editor_options:
 
 ***Figure:** Tasks in the ERP CORE dataset.*[^5]
 
--   Each experiment completed by the same 40 participants (25 female, 15 male, age 21.5 ± 2.9 years)
+-   40 participants (25 female, 15 male, age 21.5 ± 2.9 years)
 
 -   30 EEG electrodes (10/20 system) + 3 EOG electrodes (eye movements)
 
--   Sampling rate (= number of recorded EEG voltages per second) of 1024 Hz
+-   Sampling rate 1024 Hz (= EEG samples per second)
 
 [^4]: Kappenman, E. S., Farrens, J. L., Zhang, W., Stewart, A. X., & Luck, S. J. (2021). ERP CORE: An open resource for human event-related potential research. *NeuroImage*, *225*, 117465. <https://doi.org/10.1016/j.neuroimage.2020.117465>
 
@@ -101,7 +101,7 @@ editor_options:
 
 -   Start by creating an empty data directory
 
-    -   `here()` function from the `here` package to create *relative* file paths (hence reproducible on different machines and operating systems)
+    -   `here()` function from the `here` package creates *relative* file paths, hence reproducible on different machines and operating systems
 
 ```{r}
 (data_dir <- here::here("data/n170"))
@@ -121,7 +121,7 @@ remotes::install_github("alexenge/erpcore")
 
     -   `type = "bids"` type to get data in BIDS format
 
-    -   Only download the first of the 40 subjects for now
+    -   Only download one of the 40 subjects for now
 
 ```{r, message=FALSE, results="hide"}
 erpcore::get_erpcore(
@@ -154,7 +154,7 @@ erpcore::get_erpcore(
 
 -   Ideally not just the final version (e.g., upload script on OSF), but the full history
 
--   Also helpful for your future self to understand what you did 6 months ago
+-   Also helpful for your future self to understand what you did a couple of months ago
 
 -   **Version control** tools like git are very powerful for this:
 

@@ -2,7 +2,7 @@
 
 ## 👋 Welcome
 
-This is a MSc-level university seminar on analyzing EEG data in R. It follows a "code first" approach to teach the basics of event-related potentials (ERP) analysis, from raw data to statistical modeling and visualization.
+This is a MSc-level university seminar on analyzing EEG data in R. It follows a "code first" approach to teach the basics of event-related potential (ERP) analysis, from raw data to statistical modeling and visualization.
 
 The code examples draw heavily on the `eegUtils` package.[^readme-1]
 
@@ -33,10 +33,10 @@ The code examples draw heavily on the `eegUtils` package.[^readme-1]
 ## 🧭 Course content
 
 | Session       | Vignettes                                                                                                                                                                              | Homework                                                                          |
-|-----------|--------------------------|-------------------------------|
-| 29.11.2022    | [1. Introduction to R](https://alexenge.github.io/eegSeminaR/articles/cm1-introduction-to-r.html)<br>[2. Open data](https://alexenge.github.io/eegSeminaR/articles/cm2-open-data.html) | Choose ERP CORE experimenty<br>Download ERP CORE data                             |
-| 06.12.2022    | 3\. Preprocessing<br>4. Creating epochs                                                                                                                                                | Apply preprocessing to your data<br>Create epochs from your data                  |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| 29.11.2022    | [1. Introduction to R](https://alexenge.github.io/eegSeminaR/articles/cm1-introduction-to-r.html)<br>[2. Open data](https://alexenge.github.io/eegSeminaR/articles/cm2-open-data.html) | Choose ERP CORE experiment<br>Download ERP CORE data                              |
+| 06.12.2022    | 3\. Preprocessing<br>4. Creating epochs                                                                                                                                                | Apply preprocessing to your data<br>Create epochs                                 |
 | 13.12.2022    | 5\. Correcting artifacts<br>6. Extracting amplitudes                                                                                                                                   | Apply artifact correction and/or rejection<br>Extract single trial ERP amplitudes |
-|               | Happy christmas holidays! 🎅🎁🎄                                                                                                                                                       |                                                                                   |
+|               | Happy christmas holidays! 🎅🎁🎄                                                                                                                                                          |                                                                                   |
 | 03.01.2023    | 7\. Statistics<br>8. Visualization                                                                                                                                                     | Create at least one statistical model and plot<br>Upload report to Moodle         |
 | Add-on topics | 9\. Source localization<br>10. Time-frequency analysis<br>11. Multivariate analysis (decoding)                                                                                         |                                                                                   |

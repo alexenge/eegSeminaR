@@ -1,6 +1,6 @@
 ---
 title: "Get started"
-date: "`r Sys.Date()`"
+date: 2022-11-29
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Get started}
@@ -22,7 +22,7 @@ editor_options:
 
 -   Open the downloaded files and follow the installation instructions
 
-    -   If unsure, leave default options untouched
+    -   If unsure, leave default options unchanged
 
 ## Download course materials
 
@@ -42,4 +42,4 @@ editor_options:
 
 For some quick background info on EEG and event-related potentials (ERPs), see:
 
--   Luck, S. J. (2022). A very brief introduction to EEG and ERPs. In *Applied event-related potential data analysis*. LibreTexts. [Link](https://socialsci.libretexts.org/Bookshelves/Psychology/Book%3A_Applied_Event-Related_Potential_Data_Analysis_(Luck)/12%3A_Appendix_1%3A_A_Very_Brief_Introduction_to_EEG_and_ERPs)
+-   Luck, S. J. (2022). A very brief introduction to EEG and ERPs. In *Applied event-related potential data analysis*. LibreTexts. [Open access link](https://socialsci.libretexts.org/Bookshelves/Psychology/Book%3A_Applied_Event-Related_Potential_Data_Analysis_(Luck)/12%3A_Appendix_1%3A_A_Very_Brief_Introduction_to_EEG_and_ERPs)
