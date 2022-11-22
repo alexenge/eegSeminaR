@@ -166,8 +166,8 @@ parentheses:</li>
 <pre><code><span><span class="co">## [1] 64</span></span></code></pre>
 <blockquote>
 <p><strong>✍️ EXERCISE</strong></p>
-<p><em>Re-do the temperature calculation from Exercise 1.1, but this
-time storing the temperatures in two separate variables.</em></p>
+<p><em>Re-do the temperature calculation from the previous exercise, but
+this time storing the temperatures in two separate variables.</em></p>
 </blockquote>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">degrees_celsius</span> <span class="op">&lt;-</span> <span class="va">...</span></span>
@@ -227,7 +227,8 @@ all elements are <em>of the same type</em></p>
 <strong><code>data.frame</code></strong>: A table, that is, a
 two-dimensional structure with rows and columns
 <ul>
-<li><p>Each column is a vector</p></li>
+<li><p>Each column is a vector, each row is from the same sample (e.g.,
+participant, trial)</p></li>
 <li><p>Each column should be given a name (the part before the equals
 sign)</p></li>
 </ul>
@@ -391,9 +392,9 @@ to make the processing of (tabular) data in R easier (note that you’ll
 learn more about R functions and packages below). The result is code
 that is often a lot more readable.</em></p>
 <p><em>For example, here’s the usual “base” R expression for extracting
-a vector from a dataframe based on a certain condition is:
+a vector from a dataframe based on a certain condition:
 <code>universities[universities$students_k &gt; 20, ]$city</code>. The
-corresponding tidiverse version looks like this:
+corresponding tidyverse code looks like this:
 <code>universities %&gt;% filter(students_k &gt; 20) %&gt;% pull(city)</code>.</em></p>
 <p><em>For simplicity, we’ll mostly stick to base R functions and syntax
 for the remainder of the course – but you’ll surely encounter many
@@ -422,12 +423,12 @@ function:</li>
 <ul>
 <li><p>Each function has a unique <strong>name</strong></p></li>
 <li>
-<p><strong>Arguments</strong> of the functions are the inputs that
-we want the function to do something with</p>
+<p><strong>Arguments</strong> are the inputs that we want the
+function to do something with</p>
 <ul>
 <li><p>Each argument has the form of
 <code>argument_name = value</code></p></li>
-<li><p>The first argument of a function is often the data; it’s common
+<li><p>The first argument of a function is often the data – it’s common
 to leave its name out (making it a <em>positional</em>
 argument)</p></li>
 <li><p>Arguments are separated from each other by commas</p></li>
@@ -597,7 +598,7 @@ can write our own function(s):</li>
 <blockquote>
 <p><strong>✍️ EXERCISE</strong></p>
 <p><em>Write a custom function that implements the Celsius-to-Fahrenheit
-conversion from Section 1.1.</em></p>
+conversion from Section 1.2.</em></p>
 </blockquote>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">celsius_to_fahrenheit</span> <span class="op">&lt;-</span> <span class="va">...</span></span>

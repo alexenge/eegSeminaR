@@ -123,8 +123,8 @@ protocols helps to establish <strong>replicability</strong> and
 </h2>
 <table class="table">
 <colgroup>
-<col width="53%">
-<col width="46%">
+<col width="54%">
+<col width="45%">
 </colgroup>
 <thead><tr class="header">
 <th>Advantages of Open Data</th>
@@ -142,8 +142,7 @@ protocols helps to establish <strong>replicability</strong> and
 money</p></li>
 </ul></td>
 <td><ul>
-<li><p>Privacy concerns <strong>→</strong> Informed consent,
-pseudonymization</p></li>
+<li><p>Privacy concerns → Informed consent, pseudonymization</p></li>
 <li><p>Additional effort in preparing and documenting the data</p></li>
 <li><p>Fear of getting “scooped”</p></li>
 </ul></td>
@@ -174,8 +173,7 @@ Article 1. &lt;a href="https://doi.org/10.1038/s41597-019-0104-" class="external
 <code>eeg</code> – EEG recordings, etc.)</p></li>
 <li>
 <p>Raw data files (e.g., <code>.set</code>/<code>.fdt</code> for
-EEG) are accompanied by metadata (e.g., in <code>.json</code>
-format)</p>
+EEG) are accompanied by metadata in <code>.json</code> format</p>
 <ul>
 <li>Meta-data contains info about the task, the scanner, etc.</li>
 </ul>
@@ -204,12 +202,11 @@ L., Zhang, W., Stewart, A. X., &amp;amp; Luck, S. J. (2021). ERP CORE: An
 open resource for human event-related potential research.
 &lt;em&gt;NeuroImage&lt;/em&gt;, &lt;em&gt;225&lt;/em&gt;, 117465. &lt;a href="https://doi.org/10.1016/j.neuroimage.2020.117465" class="external-link uri"&gt;https://doi.org/10.1016/j.neuroimage.2020.117465&lt;/a&gt;&lt;/p&gt;'><sup>5</sup></a></p>
 <ul>
-<li><p>Each experiment completed by the same 40 participants (25 female,
-15 male, age 21.5 ± 2.9 years)</p></li>
+<li><p>40 participants (25 female, 15 male, age 21.5 ± 2.9
+years)</p></li>
 <li><p>30 EEG electrodes (10/20 system) + 3 EOG electrodes (eye
 movements)</p></li>
-<li><p>Sampling rate (= number of recorded EEG voltages per second) of
-1024 Hz</p></li>
+<li><p>Sampling rate 1024 Hz (= EEG samples per second)</p></li>
 </ul>
 </div>
 <div class="section level2">
@@ -223,9 +220,9 @@ data&lt;/em&gt;. &lt;a href="https://github.com/eegverse/erpcore" class="externa
 <p>Start by creating an empty data directory</p>
 <ul>
 <li>
-<code>here()</code> function from the <code>here</code> package to
-create <em>relative</em> file paths (hence reproducible on different
-machines and operating systems)</li>
+<code>here()</code> function from the <code>here</code> package
+creates <em>relative</em> file paths, hence reproducible on different
+machines and operating systems</li>
 </ul>
 </li>
 </ul>
@@ -250,7 +247,7 @@ installed from GitHub instead of CRAN</li>
 face percetion (N170) experiment</p></li>
 <li><p><code>type = "bids"</code> type to get data in BIDS
 format</p></li>
-<li><p>Only download the first of the 40 subjects for now</p></li>
+<li><p>Only download one of the 40 subjects for now</p></li>
 </ul>
 </li>
 </ul>
@@ -295,8 +292,8 @@ electroencephalography. <em>Scientific Data</em>, <em>6</em>(1), Article
 just our data but also our code</p></li>
 <li><p>Ideally not just the final version (e.g., upload script on OSF),
 but the full history</p></li>
-<li><p>Also helpful for your future self to understand what you did 6
-months ago</p></li>
+<li><p>Also helpful for your future self to understand what you did a
+couple of months ago</p></li>
 <li>
 <p><strong>Version control</strong> tools like git are very powerful
 for this:</p>

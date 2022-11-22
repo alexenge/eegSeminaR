@@ -4,11 +4,8 @@ pkgdown_sha: ~
 articles:
   cm1-introduction-to-r: cm1-introduction-to-r.html
   cm2-open-data: cm2-open-data.html
-  cm3-preprocessing: cm3-preprocessing.html
-  cm4-creating-epochs: cm4-creating-epochs.html
-  cm5-dealing-with-artifacts: cm5-dealing-with-artifacts.html
   eegSeminaR: eegSeminaR.html
-last_built: 2022-11-21T14:11Z
+last_built: 2022-11-22T15:05Z
 urls:
   reference: https://alexenge.github.io/eegSeminaR/reference
   article: https://alexenge.github.io/eegSeminaR/articles
