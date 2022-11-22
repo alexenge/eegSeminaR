@@ -1,5 +1,9 @@
 # eegSeminaR <img src="man/figures/logo.png" align="right" width="120"/>
 
+[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/alexenge/eegSeminaR/HEAD?urlpath=rstudio)
+[![Repo Status](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/alexenge/eegSeminaR/pkgdown)](https://github.com/alexenge/eegSeminaR/actions)
+
 ## 👋 Welcome
 
 This is a MSc-level university seminar on analyzing EEG data in R. It follows a "code first" approach to teach the basics of event-related potential (ERP) analysis, from raw data to statistical modeling and visualization.
@@ -31,7 +35,7 @@ The code examples draw heavily on the `eegUtils` package.[^readme-1]
 
 ### b) Interactive -- cloud server
 
--   Hit this link (or the "Launch binder" button at the top) to open the course materials on a cloud server kindly provided by the Binder project
+-   Hit [this link](https://mybinder.org/v2/gh/alexenge/eegSeminaR/HEAD?urlpath=rstudio) (or the "Launch binder" button) to open the course materials on a cloud server kindly provided by the Binder project
 
 -   Note that: (a) Launching the cloud server might take a couple of minutes, (b) resources (CPUs and memory) are limited, and (c) changes you make to the code will be lost at the end of the session
 
