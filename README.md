@@ -8,6 +8,19 @@ The code examples draw heavily on the `eegUtils` package.[^readme-1]
 
 ------------------------------------------------------------------------
 
+## 🧭 Course content
+
+| Session       | Vignettes                                                                                                                                                                              | Homework                                                                          |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| 29.11.2022    | [1. Introduction to R](https://alexenge.github.io/eegSeminaR/articles/cm1-introduction-to-r.html)<br>[2. Open data](https://alexenge.github.io/eegSeminaR/articles/cm2-open-data.html) | Choose ERP CORE experiment<br>Download ERP CORE data                              |
+| 06.12.2022    | 3\. Preprocessing<br>4. Creating epochs                                                                                                                                                | Apply preprocessing to your data<br>Create epochs                                 |
+| 13.12.2022    | 5\. Correcting artifacts<br>6. Extracting amplitudes                                                                                                                                   | Apply artifact correction and/or rejection<br>Extract single trial ERP amplitudes |
+|               | Happy christmas holidays! 🎅🎁🎄                                                                                                                                                          |                                                                                   |
+| 03.01.2023    | 7\. Statistics<br>8. Visualization                                                                                                                                                     | Create at least one statistical model and plot<br>Upload report to Moodle         |
+| Add-on topics | 9\. Source localization<br>10. Time-frequency analysis<br>11. Multivariate analysis (decoding)                                                                                         |                                                                                   |
+
+------------------------------------------------------------------------
+
 [^readme-1]: Craddock, M. (2022). *eegUtils: Utilities for electroencephalographic (EEG) analysis* (0.7.0). <https://craddm.github.io/eegUtils>
 
 ## 🤗️ How to follow along
@@ -27,16 +40,3 @@ The code examples draw heavily on the `eegUtils` package.[^readme-1]
 -   Read through a static version of the [course materials](https://alexenge.github.io/eegSeminaR/articles/cm1-r-coding-basics.html) from your web browser
 
 -   Does not allow you to run and/or modify any of the code
-
-------------------------------------------------------------------------
-
-## 🧭 Course content
-
-| Session       | Vignettes                                                                                                                                                                              | Homework                                                                          |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| 29.11.2022    | [1. Introduction to R](https://alexenge.github.io/eegSeminaR/articles/cm1-introduction-to-r.html)<br>[2. Open data](https://alexenge.github.io/eegSeminaR/articles/cm2-open-data.html) | Choose ERP CORE experiment<br>Download ERP CORE data                              |
-| 06.12.2022    | 3\. Preprocessing<br>4. Creating epochs                                                                                                                                                | Apply preprocessing to your data<br>Create epochs                                 |
-| 13.12.2022    | 5\. Correcting artifacts<br>6. Extracting amplitudes                                                                                                                                   | Apply artifact correction and/or rejection<br>Extract single trial ERP amplitudes |
-|               | Happy christmas holidays! 🎅🎁🎄                                                                                                                                                          |                                                                                   |
-| 03.01.2023    | 7\. Statistics<br>8. Visualization                                                                                                                                                     | Create at least one statistical model and plot<br>Upload report to Moodle         |
-| Add-on topics | 9\. Source localization<br>10. Time-frequency analysis<br>11. Multivariate analysis (decoding)                                                                                         |                                                                                   |
