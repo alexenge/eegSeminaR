@@ -29,11 +29,11 @@ The code examples draw heavily on the `eegUtils` package.[^readme-1]
 
 ## 🤗️ How to follow along
 
-### a) Interactive -- local (recommended)
+### a) Interactive – local (recommended)
 
 -   Follow the instructions on the ["Get started"](https://alexenge.github.io/eegSeminaR/articles/eegSeminaR.html) page to download and install the required software
 
-### b) Interactive -- cloud server
+### b) Interactive – cloud server
 
 -   Hit [this link](https://mybinder.org/v2/gh/alexenge/eegSeminaR/HEAD?urlpath=rstudio) (or the "Launch binder" button) to open the course materials on a cloud server kindly provided by the Binder project
 
