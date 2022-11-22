@@ -11,12 +11,12 @@ navbar:
     right: [search, github]
   components:
     articles:
-      text: Course materials
+      text: Course contents
       menu:
       - text: "1. Introduction to R"
-        href: articles/cm1-introduction-to-r.html
+        href: articles/v1-introduction-to-r.html
       - text: "2. Open data"
-        href: articles/cm2-open-data.html
+        href: articles/v2-open-data.html
 footer:
   structure:
     left: built_with

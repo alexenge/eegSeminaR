@@ -13,7 +13,7 @@ editor_options:
 
 > **🎯 GOALS**
 >
-> *Learning or re-capping the basics of writing code in the R language, including mathemtical operations, defining variables, different types of data, and using R functions and packages.*
+> *Learning or re-capping the basics of writing code in the R language, including mathematical operations, defining variables, different types of data, and using R functions and packages.*
 
 ## 1.1 Intro: Milk
 

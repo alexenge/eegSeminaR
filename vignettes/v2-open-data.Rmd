@@ -117,7 +117,7 @@ remotes::install_github("alexenge/erpcore")
 
 -   Download the ERP CORE data using `erpcore`:
 
-    -   `component = "n170"` to get only the data from the face percetion (N170) experiment
+    -   `component = "n170"` to get only the data from the face perception (N170) experiment
 
     -   `type = "bids"` type to get data in BIDS format
 
