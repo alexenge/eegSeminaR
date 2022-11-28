@@ -1,0 +1,35 @@
+---
+title: "Group 2: Visual search (N2pc)"
+author: "Your names go here"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_document
+---
+
+## 1. Introduction
+
+<!-- Briefly describe the experiment and how your ERP component is defined, based
+on the ERP CORE paper (https://doi.org/10.1016/j.neuroimage.2020.117465). -->
+...
+
+## 2. Downloading data
+
+<!-- This and each of the next sections should contain (a) a brief description of your
+approach (what you tried to achieve) and (b) your R code for analyzing the data. -->
+
+...
+
+```{r}
+print("This is an R code chunk, you can put your code here!")
+```
+
+## 3. Preprocessing
+
+## 4. Creating epochs
+
+## 5. Correcting artifacts
+
+## 6. Extracting amplitudes
+
+## 7. Statistics
+
+## 8. Visualization
