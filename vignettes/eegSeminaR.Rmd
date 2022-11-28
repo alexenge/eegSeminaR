@@ -16,7 +16,7 @@ editor_options:
 -   Download recent versions of R and RStudio:
 
 |                                     |                                                                                                                                                                                                                                              |
-|-------------------------------|---------------------------------------|
+|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **R** (Version 4.2.2)               | Download for [Mac (Intel)](https://cran.rstudio.com/bin/macosx/base/R-4.2.2.pkg), [Mac (M1)](https://cran.rstudio.com/bin/macosx/big-sur-arm64/base/R-4.2.2-arm64.pkg), [Windows](https://cran.rstudio.com/bin/windows/base/R-4.2.2-win.exe) |
 | **RStudio** (Version 2022.07.2-576) | Download for [Mac](https://download1.rstudio.org/desktop/macos/RStudio-2022.07.2-576.dmg), [Windows](https://download1.rstudio.org/desktop/windows/RStudio-2022.07.2-576.exe)                                                                |
 
@@ -36,7 +36,7 @@ editor_options:
 
 -   This should open a new RStudio window
 
--   In the "Files" pane (typically on the lower right-hand part of your screen), click on the folder `vignettes` and open the first vignette (`cm1-introduction-to-r.Rmd`)
+-   In the "Files" pane (typically on the lower right-hand part of your screen), click on the folder `vignettes` and open the first vignette (`v1-introduction-to-r.Rmd`)
 
 ## Further reading
 
