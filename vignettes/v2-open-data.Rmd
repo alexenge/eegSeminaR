@@ -1,6 +1,6 @@
 ---
 title: "2. Open data"
-date: "2022-11-29"
+date: "2022-12-06"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{2. Open data}
