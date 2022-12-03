@@ -17,6 +17,10 @@ navbar:
         href: articles/v1-introduction-to-r.html
       - text: "2. Open data"
         href: articles/v2-open-data.html
+      - text: "3. Preprocessing"
+        href: articles/v3-preprocessing.html
+      - text: "4. Creating epochs"
+        href: articles/v4-creating-epochs.html
 footer:
   structure:
     left: built_with
