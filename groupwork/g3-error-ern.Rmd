@@ -1,5 +1,5 @@
 ---
-title: "Group 4: Target detection (P3)"
+title: "Group 3: Error processing (ERN)"
 author: "Your names go here"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document

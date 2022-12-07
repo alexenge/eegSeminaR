@@ -1,5 +1,5 @@
 ---
-title: "Group 2: Visual search (N2pc)"
+title: "Group 2: Target detection (P3)"
 author: "Your names go here"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document

@@ -1,5 +1,5 @@
 ---
-title: "Group 6: Motor preparation (LRP)"
+title: "Group 4: Auditory processing (MMN)"
 author: "Your names go here"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document
