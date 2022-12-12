@@ -52,7 +52,7 @@ ica <- run_ICA(dat_epo, method = "fastica", pca = n_components)
 
     -   Vertical eye movement components: Opposite polarities left-frontal versus right-frontal (maybe `Comp008` and/or `Comp009`)
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 topoplot(
   ica,
   component = 1:n_components,
