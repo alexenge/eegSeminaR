@@ -1,0 +1,102 @@
+---
+title: "6. Extracting amplitudes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{6. Extracting amplitudes}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor: visual
+editor_options:
+  chunk_output_type: inline
+---
+
+> 🎯 **GOALS**
+>
+> *Extracting one value (mean ERP amplitude) per trial for statistical modeling.*
+
+## 6.1 Read preprocessed epochs
+
+-   Load packages and (artifact-corrected) epochs:
+
+```{r, message=FALSE}
+library(here)
+library(eegUtils)
+library(ggplot2)
+```
+
+```{r}
+bids_dir <- here("data/n170")
+deriv_dir <- here(bids_dir, "derivatives/eegUtils/sub-001/eeg")
+preproc_file <- here(deriv_dir, "sub-001_task-N170_desc-preprocessed_eeg.rds")
+epoch_file <- here(deriv_dir, "sub-001_task-N170_desc-corrected_eeg.rds")
+dat_epo <- readRDS(epoch_file)
+```
+
+## 6.2 Select region of interest
+
+-   Measures from a single EEG electrodes are noisy and spatially imprecise (e.g., volume conduction)
+
+-   Averaging across nearby electrodes boosts signal-to-noise ratio
+
+-   **Region of interest (ROI)** = the set of electrodes where we expect our ERP component of interest to be maximal
+
+-   Convert epoched data to a single data frame for subsequent subsetting / averaging:
+
+```{r}
+dat_frame <- as.data.frame(dat_epo)
+str(dat_frame)
+```
+
+-   Create a new "virtual" channel (i.e., column) containing the average signal in the ROI:
+
+```{r}
+roi <- c("P7", "P8", "P9", "P10", "PO7", "PO8")
+dat_frame$roi <- rowMeans(dat_frame[roi])
+```
+
+## 6.2 Select time window
+
+-   ERP components unfold on the time scale of 10 to multiple 100s of milliseconds
+
+-   Select the **time window** where we expect our component to be (here: around 170 ms for the N170)
+
+    -   Both region and time window of interest should be defined *before* looking at the data (i.e., preregistration)
+
+```{r}
+tmin <- 0.15
+tmax <- 0.2
+dat_frame <- subset(dat_frame, time >= tmin & time < tmax)
+```
+
+-   Averaging across this time window gets us one value (mean ERP amplitude) per trail
+
+    -   Carry over the \`epoch_labels\` so we know the condition of each trial
+
+```{r}
+dat_trials <- aggregate(roi ~ epoch + epoch_labels, dat_frame, mean)
+str(dat_trials)
+```
+
+-   A quick exploratory box plot of the single trial mean ERP amplitudes for faces vs. cars:
+
+```{r}
+ggplot(dat_trials, aes(x = epoch_labels, y = roi)) +
+  geom_boxplot() +
+  labs(x = NULL, y = "Mean amplitude (µV)") +
+  theme_minimal()
+```
+
+-   We'll quantify this effect using statistical modeling in the next vignette
+
+-   Save the single trial data for later:
+
+```{r}
+trials_file <- here(deriv_dir, "sub-001_task-N170_desc-trials_eeg.rds")
+saveRDS(dat_trials, trials_file)
+```
+
+## Further reading
+
+-   Luck, S. J., & Gaspelin, N. (2017). How to get statistically significant effects in any ERP experiment (and why you shouldn't). *Psychophysiology*, *54*(1), 146--157. <https://doi.org/10.1111/psyp.12639>
+
+-   Paul, M., Govaart, G. H., & Schettino, A. (2021). Making ERP research more transparent: Guidelines for preregistration. *International Journal of Psychophysiology*, *164*, 52--63. <https://doi.org/10.1016/j.ijpsycho.2021.02.016>

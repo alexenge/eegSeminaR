@@ -226,6 +226,7 @@ saveRDS(dat_filt, preproc_file)
 ## Further reading
 
 -   Newman, A. J., Godfrey, D., & Post, R. (2022). EEG-ERP Preprocessing. In *Data Science for Psychology and Neuroscience -- in Python*. Dalhousie University. <https://neuraldatascience.io/7-eeg/erp_preprocessing.html>
+-   Delorme, A. (2022). *EEG is better left alone* (p. 2022.12.03.518987). bioRxiv. <https://doi.org/10.1101/2022.12.03.518987>
 
 ## Add-on topics
 
