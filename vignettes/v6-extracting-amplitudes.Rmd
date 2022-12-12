@@ -1,5 +1,6 @@
 ---
 title: "6. Extracting amplitudes"
+date: "2022-12-13"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{6. Extracting amplitudes}
