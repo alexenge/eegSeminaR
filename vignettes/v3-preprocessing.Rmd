@@ -94,7 +94,7 @@ str(dat_raw)
 browse_data(dat_raw)
 ```
 
--   Check out multiple time points ("Display start time") and switch between the "Individual" view and the "Butterfly"
+-   Check out multiple time points ("Display start time") and switch between the "Individual" view and the "Butterfly" view
 -   Remember to click "Done" or you will not be able run the next piece of code
 
 > ✍️ **EXERCISE**

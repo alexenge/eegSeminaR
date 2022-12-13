@@ -27,7 +27,6 @@ library(eegUtils)
 ```{r}
 bids_dir <- here("data/n170")
 deriv_dir <- here(bids_dir, "derivatives/eegUtils/sub-001/eeg")
-preproc_file <- here(deriv_dir, "sub-001_task-N170_desc-preprocessed_eeg.rds")
 epoch_file <- here(deriv_dir, "sub-001_task-N170_desc-epoched_eeg.rds")
 dat_epo <- readRDS(epoch_file)
 ```
@@ -161,15 +160,19 @@ saveRDS(dat_rej, corr_file)
 
 ### 5.4 Multiple source eye correction
 
--   **Multiple source eye correction (MSEC)** = a semi-automatic algorithm to model and correct eye blinks and eye movements
+-   **Multiple source eye correction (MSEC)** = a semi-automatic algorithm to model and correct eye blinks and eye movements[^5],[^6]
 
 -   Explicitly models the dipole sources of the eye movements (unlike ICA)
 
 -   Requires manual annotation of "true" eye blinks and eye movements, ideally from independent calibration data
 
--   Available in a commercial software package (BESA)
+-   Available in a commercial software package, [Brain Electrical Source Analysis (BESA)](https://www.besa.de/products/besa-research/besa-research-overview/)
 
 -   Creates a correction matrix that -- via matrix multiplication -- removes eye movements from the actual data
+
+[^5]: Berg, P., & Scherg, M. (1994). A multiple source approach to the correction of eye artifacts. *Electroencephalography and Clinical Neurophysiology*, *90*(3), 229--241. [https://doi.org/10.1016/0013-4694(94)90094-9](https://doi.org/10.1016/0013-4694(94)90094-9)
+
+[^6]: BESA Wiki. (2022). *BESA Research Artifact Correction*. <http://wiki.besa.de/index.php?title=BESA_Research_Artifact_Correction>
 
 ### 5.5 Regression
 

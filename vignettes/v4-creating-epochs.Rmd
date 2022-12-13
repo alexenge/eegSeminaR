@@ -130,3 +130,7 @@ basl_signals <- ...
 epo_file <- here(deriv_dir, "sub-001_task-N170_desc-epoched_eeg.rds")
 saveRDS(dat_basl, epo_file)
 ```
+
+## Further reading
+
+-   Craddock, M. (2021). *Event and epoch handling*. eegUtils: Utilities for Electroencephalographic (EEG) Analysis. <https://craddm.github.io/eegUtils/articles/epoch-handling.html>
