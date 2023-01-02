@@ -17,12 +17,16 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     cowsay,
+    dplyr,
     eegUtils,
     erpcore,
     hdf5r,
     here,
     ica,
-    R.matlab
+    lme4,
+    lmerTest,
+    R.matlab,
+    tidyr
 Suggests: 
     knitr,
     rmarkdown

@@ -19,11 +19,15 @@ editor_options:
 
 -   Load required packages:
 
+    -   `ggplot2` for plotting
+
+    -   `dplyr` and `tidyr` for data wrangling
+
 ```{r, message=FALSE}
 library(here)
 library(ggplot2)
-library(tidyr)
 library(dplyr)
+library(tidyr)
 library(eegUtils)
 ```
 
