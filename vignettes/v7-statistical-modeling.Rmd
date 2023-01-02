@@ -137,6 +137,12 @@ summary(mod_lmm)
 
 [^4]: This is only true on a rough, conceptual level. In reality, R doesn't estimate separate regression coefficients for each participant but rather just the *variance* of these coefficients across participants, using a iterative approach called (restricted) [maximum likelihood estimation](https://towardsdatascience.com/probability-concepts-explained-maximum-likelihood-estimation-c7b4342fdbb1).
 
+## Further reading
+
+-   Frömer, R., Maier, M., & Abdel Rahman, R. (2018). Group-level EEG-processing pipeline for flexible single trial-based analyses including linear mixed models. *Frontiers in Neuroscience*, *12*, 48. <https://doi.org/10.3389/fnins.2018.00048>
+
+-   Volpert-Esmond, H. I., Page-Gould, E., & Bartholow, B. D. (2021). Using multilevel models for the analysis of event-related potentials. *International Journal of Psychophysiology*, *162*, 145--156. <https://doi.org/10.1016/j.ijpsycho.2021.02.006>
+
 ## Add-on topics
 
 ### 7.5 Repeated measures ANOVA

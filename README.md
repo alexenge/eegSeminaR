@@ -21,7 +21,7 @@ The code examples draw heavily on the `eegUtils` package.[^readme-1]
 | 2022-12-13 | [4\. Creating epochs](https://alexenge.github.io/eegSeminaR/articles/v4-creating-epochs.html)<br>[5\. Removing artifacts](https://alexenge.github.io/eegSeminaR/articles/v5-removing-artifacts.html) | Create epochs<br>Apply artifact correction and/or rejection |
 | | Happy Christmas holidays! 🎅🎁🎄 | |
 | 2023-01-03 | [6\. Extracting amplitudes](https://alexenge.github.io/eegSeminaR/articles/v6-extracting-amplitudes.html)<br>[7\. Statistical modeling](https://alexenge.github.io/eegSeminaR/articles/v7-statistical-modeling.html)<br>[8\. Making plots](https://alexenge.github.io/eegSeminaR/articles/v8-making-plots.html) | Extract single trial ERP amplitudes<br>Create at least one statistical model or plot<br>Upload report to Moodle |
-| Add-on topics<br>(to be done) | 9\. Source localization<br>10\. Time-frequency analysis<br>11\. Multivariate analysis (decoding) | |
+| Add-on topics | 9\. Source localization<br>10\. Time-frequency analysis<br>11\. Multivariate analysis (decoding) | |
 
 ------------------------------------------------------------------------
 
