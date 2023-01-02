@@ -1,6 +1,6 @@
 # eegSeminaR <img src="man/figures/logo.png" align="right" width="120"/>
 
-[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/alexenge/eegSeminaR/HEAD?urlpath=rstudio) [![Repo Status](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip) [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/alexenge/eegSeminaR/pkgdown)](https://github.com/alexenge/eegSeminaR/actions) [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![Launch Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/alexenge/eegSeminaR/HEAD?urlpath=rstudio) [![Repo Status](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/alexenge/eegSeminaR/pkgdown.yaml)](https://github.com/alexenge/eegSeminaR/actions) [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 ## 👋 Welcome
 
