@@ -1,5 +1,5 @@
 pandoc: 2.19.2
-pkgdown: 2.0.6
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   eegSeminaR: eegSeminaR.html
@@ -9,7 +9,9 @@ articles:
   v4-creating-epochs: v4-creating-epochs.html
   v5-removing-artifacts: v5-removing-artifacts.html
   v6-extracting-amplitudes: v6-extracting-amplitudes.html
-last_built: 2022-12-13T10:11Z
+  v7-statistical-modeling: v7-statistical-modeling.html
+  v8-making-plots: v8-making-plots.html
+last_built: 2023-01-02T11:26Z
 urls:
   reference: https://alexenge.github.io/eegSeminaR/reference
   article: https://alexenge.github.io/eegSeminaR/articles
