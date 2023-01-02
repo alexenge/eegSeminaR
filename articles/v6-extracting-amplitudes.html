@@ -123,7 +123,7 @@ imprecise (e.g., volume conduction)</p></li>
 ratio</p></li>
 <li><p><strong>Region of interest (ROI)</strong> = the set of electrodes
 where we expect our ERP component of interest to be maximal</p></li>
-<li><p>First convert epoched data to a single data frame for subsequent
+<li><p>First convert epoched data to a data frame for subsequent
 subsetting / averaging:</p></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -187,8 +187,8 @@ of ms</p></li>
 <p>Select the <strong>time window</strong> where we expect our
 component to be (here: around 170 ms for the N170)</p>
 <ul>
-<li>Both region and time window of interest should be defined
-<em>before</em> looking at the data (i.e., preregistration)</li>
+<li>Note: Region and time window of interest should be defined
+<em>before</em> looking at the data (i.e., preregistration)!</li>
 </ul>
 </li>
 </ul>
@@ -201,8 +201,9 @@ component to be (here: around 170 ms for the N170)</p>
 <p>Averaging across this time window gets us one value (mean ERP
 amplitude) per trail</p>
 <ul>
-<li>Carry over the <code>epoch_labels</code> so we know the condition of
-each trial</li>
+<li>Carry over the <code>epoch_labels</code> (coding the condition of
+each trial) and the <code>event_type</code> (coding the specific
+stimulus that was presented)</li>
 </ul>
 </li>
 </ul>
@@ -221,8 +222,8 @@ each trial</li>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dat_trials</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"epoch"</span>, <span class="st">"stimulus"</span>, <span class="st">"condition"</span>, <span class="st">"amplitude"</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>A quick exploratory box plot of the single trial mean ERP amplitudes
-for faces vs. cars:</li>
+<li>Quick box plot comparing the single trial mean ERP amplitudes for
+faces vs. cars:</li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">dat_trials</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">condition</span>, y <span class="op">=</span> <span class="va">amplitude</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -231,8 +232,8 @@ for faces vs. cars:</li>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="v6-extracting-amplitudes_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <ul>
-<li><p>We’ll quantify this effect using statistical modeling in the next
-vignette</p></li>
+<li><p>We’ll quantify this effect using statistical modeling in Vignette
+7</p></li>
 <li><p>Save the single trial data for later:</p></li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -325,7 +326,7 @@ processing options</p></li>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">set_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span></span>
 <span>  <span class="va">bids_dir</span>,</span>
-<span>  pattern <span class="op">=</span> <span class="st">"sub-.*.set"</span>,</span>
+<span>  pattern <span class="op">=</span> <span class="st">"\\.set$"</span>,</span>
 <span>  recursive <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  full.names <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -370,493 +371,33 @@ processing options</p></li>
 <span><span class="co">## [39] "/home/runner/work/eegSeminaR/eegSeminaR/data/n170/sub-040/eeg/sub-040_task-N170_eeg.set"</span></span></code></pre>
 <ul>
 <li>Apply the pipeline function to each <code>.set</code> file,
-returning a list of data frames (one for each participants)</li>
+returning a list of data frames (one for each participant)</li>
 </ul>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dats_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">set_files</span>, <span class="va">run_pipeline</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 3842 (0.28%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 4574 (0.34%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 128 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 128 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 89 (0.01%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 46 (0%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 5 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 5 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 14872 (1.1%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 7705 (0.57%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 125 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 125 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 11382 (0.84%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 6458 (0.48%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 131 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 131 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 9021 (0.66%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 7983 (0.59%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 158 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 158 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 6270 (0.46%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 4347 (0.32%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 105 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 105 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 6526 (0.48%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 3406 (0.25%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 71 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 71 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 7927 (0.58%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 5144 (0.38%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 126 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 126 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 9396 (0.69%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 4449 (0.33%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 144 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 144 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 12036 (0.89%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 5647 (0.42%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 117 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 117 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 147 (0.01%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 291 (0.02%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 15 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 15 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 851 (0.06%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 575 (0.04%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 54 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 54 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 1794 (0.13%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 828 (0.06%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 72 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 72 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 796 (0.06%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 977 (0.07%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 55 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 55 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 389 (0.03%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 317 (0.02%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 19 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 19 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 298 (0.02%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 831 (0.06%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 105 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 105 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 9710 (0.72%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 5838 (0.43%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 148 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 148 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 124 (0.01%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 401 (0.03%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 15 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 15 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 1839 (0.14%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 1333 (0.1%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 52 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 52 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 5872 (0.43%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 2990 (0.22%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 75 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 75 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 62 (0%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 41 (0%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 8 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 8 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 8930 (0.66%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 3847 (0.28%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 123 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 123 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 3871 (0.29%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 2614 (0.19%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 111 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 111 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 6084 (0.45%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 4681 (0.34%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 125 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 125 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 5500 (0.41%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 1943 (0.14%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 58 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 58 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 2272 (0.17%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 1268 (0.09%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 35 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 35 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 8236 (0.61%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 3732 (0.28%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 85 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 85 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 4768 (0.35%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 4452 (0.33%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 118 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 118 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 20325 (1.5%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 9221 (0.68%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 130 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 130 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 2686 (0.2%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 1545 (0.11%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 68 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 68 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 12779 (0.94%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 5548 (0.41%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 155 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 155 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 1048 (0.08%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 593 (0.04%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 69 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 69 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 326 (0.02%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 232 (0.02%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 17 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 17 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 3651 (0.27%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 2885 (0.21%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 82 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 82 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 9548 (0.7%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 3812 (0.28%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 108 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 108 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 2542 (0.19%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 3642 (0.27%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 118 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 118 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 318 (0.02%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 17 (0%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 13 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 13 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 4265 (0.31%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 633 (0.05%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 95 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 95 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing from EEGLAB .set file.</span></span></code></pre>
-<pre><code><span><span class="co">## Importing data from .fdt file.</span></span></code></pre>
-<pre><code><span><span class="co">## Electrodes not found: HEOG_left HEOG_right VEOG_lower</span></span></code></pre>
-<pre><code><span><span class="co">## Downsampling from 1024Hz to 256Hz.</span></span></code></pre>
-<pre><code><span><span class="co">## Adjusting output limits to match sampling rate.</span></span></code></pre>
-<pre><code><span><span class="co">## Output limits:  -0.19921875 0.80078125</span></span></code></pre>
-<pre><code><span><span class="co">## Baseline: -0.2 sBaseline: 0 s</span></span></code></pre>
-<pre><code><span><span class="co">## Creating 160 epochs.</span></span></code></pre>
-<pre><code><span><span class="co">## 5208 (0.38%) samples above 100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 2880 (0.21%) samples below -100 uV threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## 69 epochs contain samples above threshold.</span></span></code></pre>
-<pre><code><span><span class="co">## Removing 69 epochs.</span></span></code></pre>
 <ul>
 <li>
 <p>Combine all data frames into one big data frame:</p>
 <ul>
-<li>Adding a column to keep track which trials belong to which
+<li>Adding an ID column to keep track which trials belong to which
 participant</li>
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dat_group</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">dats_group</span>, .id <span class="op">=</span> <span class="st">"participant"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat_group</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">dats_group</span>, .id <span class="op">=</span> <span class="st">"participant"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat_group</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##   participant epoch stimulus condition  amplitude</span></span>
+<span><span class="co">## 1           1   105       41       car  2.1057134</span></span>
+<span><span class="co">## 2           1     8       56       car -4.2724834</span></span>
+<span><span class="co">## 3           1     7       59       car  7.9375438</span></span>
+<span><span class="co">## 4           1   153       62       car -0.9975663</span></span>
+<span><span class="co">## 5           1   104       63       car 13.9909229</span></span>
+<span><span class="co">## 6           1    13       65       car  0.6623084</span></span></code></pre>
 <ul>
 <li>Save for later:</li>
 </ul>
-<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">group_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="va">bids_dir</span>, <span class="st">"derivatives/eegUtils/group_task-N170_trials.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">dat_group</span>, <span class="va">group_file</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>

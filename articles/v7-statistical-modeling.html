@@ -103,21 +103,21 @@ faces versus cars).</em></p>
 </h2>
 <ul>
 <li><p>Like ants, scientists can achieve amazing things if they
-cooporate</p></li>
+cooperate</p></li>
 <li><p>But sometimes they get lost by blindly following one
 another</p></li>
 </ul>
 <p><img src="images/ants.png"></p>
 <p><em><strong>Figure:</strong> Ants being collectively clever and
-collectively stupid.</em><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;strong&gt;Souce:&lt;/strong&gt; &lt;a href="https://imgur.com/KWXSw" class="external-link"&gt;Imgur&lt;/a&gt;, &lt;a href="https://www.youtube.com/watch?v=LEKwQxO4EZU" class="external-link"&gt;YouTube&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a></p>
+collectively stupid.</em><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;strong&gt;Source:&lt;/strong&gt; &lt;a href="https://imgur.com/KWXSw" class="external-link"&gt;Imgur&lt;/a&gt;, &lt;a href="https://www.youtube.com/watch?v=LEKwQxO4EZU" class="external-link"&gt;YouTube&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a></p>
 </div>
 <div class="section level2">
 <h2 id="t-test">7.2 <em>t</em>-test<a class="anchor" aria-label="anchor" href="#t-test"></a>
 </h2>
 <ul>
 <li><p>We’ll start with modeling data for a <strong>single
-subject</strong> and move to a group analysis (inclduding all 40 ERP
-CORE participants) in Section 7.4</p></li>
+subject</strong> and move to a group analysis (including all 40 ERP CORE
+participants) in Section 7.4</p></li>
 <li>
 <p>Load required packages:</p>
 <ul>
@@ -203,7 +203,7 @@ trials with <code>0</code> and <code>"face"</code> trials with
 trials</p></li>
 <li><p>Predictor effect (<code>epoch_labelsface</code>) is the
 difference between a face trial and a car trial</p></li>
-<li><p>This effect explains 8.7% of the variance in the N170 (see <span class="math inline">\(R^2\)</span>)</p></li>
+<li><p>This effect explains 9% of the variance in the N170 (see <span class="math inline">\(R^2\)</span>)</p></li>
 </ul>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">form_lm</span>, <span class="va">dat_trials</span><span class="op">)</span></span>
@@ -269,7 +269,7 @@ participants:</p></li>
 <li>
 <p><strong>Fixed effects</strong> :</p>
 <ul>
-<li><p>Everything after <code>~</code> but not in paranthesis</p></li>
+<li><p>Everything after <code>~</code> but not in parentheses</p></li>
 <li><p>Capture intercept and predictor effect <em>across</em>
 subjects</p></li>
 <li><p>Usually our effects of interest</p></li>
@@ -330,8 +330,11 @@ voltages in the N170 time range</li>
 </ul>
 </div>
 <div class="section level2">
-<h2 id="repeated-measures-anova">7.5 Repeated measures ANOVA<a class="anchor" aria-label="anchor" href="#repeated-measures-anova"></a>
+<h2 id="add-on-topics">Add-on topics<a class="anchor" aria-label="anchor" href="#add-on-topics"></a>
 </h2>
+<div class="section level3">
+<h3 id="repeated-measures-anova">7.5 Repeated measures ANOVA<a class="anchor" aria-label="anchor" href="#repeated-measures-anova"></a>
+</h3>
 <ul>
 <li><p>LMMs used to be difficult to fit before modern computer
 hardware</p></li>
@@ -393,7 +396,7 @@ equivalent to a paired <em>t</em>-test:</li>
 model:</p>
 <ul>
 <li><p>Independence assumption violated because participant effects and
-item effects cannot be accounted for simultanously<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Bürki, A., Frossard, J., &amp;amp; Renaud, O. (2018).
+item effects cannot be accounted for simultaneously<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Bürki, A., Frossard, J., &amp;amp; Renaud, O. (2018).
 Accounting for stimulus and participant effects in event-related
 potential analyses to increase the replicability of studies. &lt;em&gt;Journal
 of Neuroscience Methods&lt;/em&gt;, &lt;em&gt;309&lt;/em&gt;, 218–227. &lt;a href="https://doi.org/10.1016/j.jneumeth.2018.09.016" class="external-link uri"&gt;https://doi.org/10.1016/j.jneumeth.2018.09.016&lt;/a&gt;&lt;/p&gt;'><sup>5</sup></a></p></li>
@@ -408,6 +411,7 @@ trials per condition and/or per participant)</p></li>
 <p><em><strong>Figure:</strong> Mixed models are becoming the standard
 tool for analyzing data in experimental psychology.</em><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;strong&gt;Source:&lt;/strong&gt; &lt;a href="https://imgflip.com/memegenerator/Left-Exit-12-Off-Ramp" class="external-link"&gt;imgflip
 Meme Generator&lt;/a&gt;&lt;/p&gt;'><sup>6</sup></a></p>
+</div>
 </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
