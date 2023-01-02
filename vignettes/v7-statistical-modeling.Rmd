@@ -17,7 +17,7 @@ editor_options:
 
 ## 7.1 Intro: Ants
 
--   Like ants, scientists can achieve amazing things if they cooporate
+-   Like ants, scientists can achieve amazing things if they cooperate
 
 -   But sometimes they get lost by blindly following one another
 
@@ -25,11 +25,11 @@ editor_options:
 
 ***Figure:** Ants being collectively clever and collectively stupid.*[^1]
 
-[^1]: **Souce:** [Imgur](https://imgur.com/KWXSw), [YouTube](https://www.youtube.com/watch?v=LEKwQxO4EZU)
+[^1]: **Source:** [Imgur](https://imgur.com/KWXSw), [YouTube](https://www.youtube.com/watch?v=LEKwQxO4EZU)
 
 ## 7.2 *t*-test
 
--   We'll start with modeling data for a **single subject** and move to a group analysis (inclduding all 40 ERP CORE participants) in Section 7.4
+-   We'll start with modeling data for a **single subject** and move to a group analysis (including all 40 ERP CORE participants) in Section 7.4
 
 -   Load required packages:
 
@@ -83,7 +83,7 @@ form_lm <- amplitude ~ 1 + condition
 
 -   Predictor effect (`epoch_labelsface`) is the difference between a face trial and a car trial
 
--   This effect explains 8.7% of the variance in the N170 (see $R^2$)
+-   This effect explains 9% of the variance in the N170 (see $R^2$)
 
 ```{r}
 mod <- lm(form_lm, dat_trials)
@@ -110,7 +110,7 @@ head(dat_group)
 
     -   **Fixed effects** :
 
-        -   Everything after `~` but not in paranthesis
+        -   Everything after `~` but not in parentheses
 
         -   Capture intercept and predictor effect *across* subjects
 
@@ -137,7 +137,9 @@ summary(mod_lmm)
 
 [^4]: This is only true on a rough, conceptual level. In reality, R doesn't estimate separate regression coefficients for each participant but rather just the *variance* of these coefficients across participants, using a iterative approach called (restricted) [maximum likelihood estimation](https://towardsdatascience.com/probability-concepts-explained-maximum-likelihood-estimation-c7b4342fdbb1).
 
-## 7.5 Repeated measures ANOVA
+## Add-on topics
+
+### 7.5 Repeated measures ANOVA
 
 -   LMMs used to be difficult to fit before modern computer hardware
 
@@ -166,7 +168,7 @@ t.test(amplitude ~ condition, data = dat_ave, paired = TRUE)
 
 -   Note that rmANOVA has a number of drawbacks compared to a mixed model:
 
-    -   Independence assumption violated because participant effects and item effects cannot be accounted for simultanously[^5]
+    -   Independence assumption violated because participant effects and item effects cannot be accounted for simultaneously[^5]
 
     -   Not robust to unbalanced designs (i.e., different numbers of trials per condition and/or per participant)
 

@@ -107,6 +107,6 @@ head(dat_topo)
 
 -   Create the topographic plot with `eegUtils`:
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 topoplot(dat_topo, limits = c(-6.0, 6.0))
 ```
