@@ -1,6 +1,6 @@
 ---
 title: "6. Extracting amplitudes"
-date: "2022-12-13"
+date: "2023-01-03"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{6. Extracting amplitudes}
@@ -73,16 +73,24 @@ dat_frame <- subset(dat_frame, time >= tmin & time < tmax)
     -   Carry over the `epoch_labels` so we know the condition of each trial
 
 ```{r}
-dat_trials <- aggregate(roi ~ epoch + epoch_labels, dat_frame, mean)
+dat_trials <- aggregate(
+  roi ~ epoch + event_type + epoch_labels,
+  dat_frame,
+  mean
+)
 str(dat_trials)
+```
+
+```{r}
+names(dat_trials) <- c("epoch", "stimulus", "condition", "amplitude")
 ```
 
 -   A quick exploratory box plot of the single trial mean ERP amplitudes for faces vs. cars:
 
 ```{r}
-ggplot(dat_trials, aes(x = epoch_labels, y = roi)) +
+ggplot(dat_trials, aes(x = condition, y = amplitude)) +
   geom_boxplot() +
-  labs(x = NULL, y = "Mean amplitude (µV)") +
+  labs(x = NULL, y = "N170 amplitude (µV)") +
   theme_minimal()
 ```
 
@@ -91,8 +99,8 @@ ggplot(dat_trials, aes(x = epoch_labels, y = roi)) +
 -   Save the single trial data for later:
 
 ```{r}
-trials_file <- here(deriv_dir, "sub-001_task-N170_desc-trials_eeg.rds")
-saveRDS(dat_trials, trials_file)
+trials_file <- here(deriv_dir, "sub-001_task-N170_trials.csv")
+write.csv(dat_trials, trials_file, row.names = FALSE)
 ```
 
 ## Further reading
@@ -100,3 +108,95 @@ saveRDS(dat_trials, trials_file)
 -   Luck, S. J., & Gaspelin, N. (2017). How to get statistically significant effects in any ERP experiment (and why you shouldn't). *Psychophysiology*, *54*(1), 146--157. <https://doi.org/10.1111/psyp.12639>
 
 -   Paul, M., Govaart, G. H., & Schettino, A. (2021). Making ERP research more transparent: Guidelines for preregistration. *International Journal of Psychophysiology*, *164*, 52--63. <https://doi.org/10.1016/j.ijpsycho.2021.02.016>
+
+## Add-on topics
+
+### 6.3 Building a pipeline
+
+-   Download the data from **all** participant (leaving out the `subject` argument in `get_erpcore()`)
+
+```{r, message=FALSE, results="hide"}
+erpcore::get_erpcore(
+  component = "n170",
+  dest_path = bids_dir,
+  conflicts = "overwrite",
+  type = "bids"
+)
+```
+
+-   Define a **custom pipeline function**, combining all processing steps
+
+    -   Input parameters: The EEG data (`.set`) file + all processing options
+
+    -   Return value: A data frame with single trial mean ERP amplitudes (as above)
+
+```{r}
+run_pipeline <- function(set_file,
+                         montage = "biosemi64",
+                         reref_chans = "average",
+                         reref_exclude = c("HEOG_left", "HEOG_right", "VEOG_lower"),
+                         filter_low_freq = 0.1,
+                         filter_high_freq = 30.0,
+                         downsample_factor = 4.0,
+                         event_codes = c(1:80),
+                         epoch_labels = c(rep("face", 40), rep("car", 40)),
+                         epoch_time_lim = c(-0.2, 0.8),
+                         baseline = c(-0.2, 0.0),
+                         artifact_threshold = c(-100.0, 100.0),
+                         erp_roi = c("P7", "P8", "P9", "P10", "PO7", "PO8"),
+                         erp_time_lim = c(0.15, 0.2)) {
+
+  # From Vignette 3: Preprocessing
+  dat <- import_set(set_file)
+  dat <- electrode_locations(dat, montage = montage, overwrite = TRUE)
+  dat <- eeg_reference(dat, reref_chans, reref_exclude)
+  dat <- eeg_downsample(dat, downsample_factor)
+
+  # From Vignette 4: Creating epochs
+  dat <- epoch_data(dat, event_codes, epoch_time_lim, baseline, epoch_labels)
+  dat <- ar_thresh(dat, artifact_threshold, reject = TRUE)
+
+  # From Vignette 6: Extracting amplitudes
+  dat <- as.data.frame(dat)
+  dat$roi <- rowMeans(dat[roi])
+  tmin <- min(erp_time_lim)
+  tmax <- max(erp_time_lim)
+  dat <- subset(dat, time >= tmin & time < tmax)
+  dat <- aggregate(roi ~ epoch + event_type + epoch_labels, dat, mean)
+  names(dat) <- c("epoch", "stimulus", "condition", "amplitude")
+  
+  return(dat)
+}
+```
+
+-   Find all the `.set` EEG files inside our BIDS directory (including sub-directories):
+
+```{r}
+(set_files <- list.files(
+  bids_dir,
+  pattern = "sub-.*.set",
+  recursive = TRUE,
+  full.names = TRUE
+))
+```
+
+-   Apply the pipeline function to each `.set` file, returning a list of data frames (one for each participants)
+
+```{r}
+dats_group <- lapply(set_files, run_pipeline)
+```
+
+-   Combine all data frames into one big data frame:
+
+    -   Adding a column to keep track which trials belong to which participant
+
+```{r}
+dat_group <- dplyr::bind_rows(dats_group, .id = "participant")
+```
+
+-   Save for later:
+
+```{r}
+group_file <- here(bids_dir, "derivatives/eegUtils/group_task-N170_trials.csv")
+write.csv(dat_group, group_file, row.names = FALSE)
+```

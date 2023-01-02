@@ -1,0 +1,108 @@
+---
+title: "8. Making plots"
+date: "2023-01-03"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{8. Making plots}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor: visual
+editor_options:
+  chunk_output_type: inline
+---
+
+> 🎯 **GOALS**
+>
+> *Visualizing ERP effects using time course plots and scalp topography plots.*
+
+## 8.1 Time course
+
+-   Load required packages:
+
+```{r, message=FALSE}
+library(here)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(eegUtils)
+```
+
+-   Load preprocessed epochs from a single ERP CORE participant:
+
+```{r}
+bids_dir <- here("data/n170")
+deriv_dir <- here(bids_dir, "derivatives/eegUtils/sub-001/eeg")
+epoch_file <- here(deriv_dir, "sub-001_task-N170_desc-corrected_eeg.rds")
+dat_epo <- readRDS(epoch_file)
+```
+
+-   Create a **time course plot**:
+
+    -   x-axis: Time
+
+    -   y-axis: ERP amplitude (one electrode or ROI average)
+
+    -   Colors: Average ERP wave forms in different conditions
+
+```{r}
+plot_timecourse(dat_epo, electrode = "PO7", colour = "epoch_labels")
+```
+
+-   Add annotations for the plotted time window and electrode of interest:
+
+```{r}
+tmin <- 0.15
+tmax <- 0.2
+
+plot_timecourse(dat_epo, electrode = "PO7", colour = "epoch_labels") +
+  annotate("rect", xmin = tmin, xmax = tmax, ymin = -Inf, ymax = Inf, alpha = 0.2) +
+  annotate("text", x = 0.7, y = 8, label = "Electrode PO8")
+```
+
+-   Plot all electrodes:
+
+```{r}
+erp_scalp(dat_epo, colour = "epoch_labels", size = 0.6)
+```
+
+## 8.2 Scalp topography
+
+-   **Scalp topography** shows the distribution of voltages on the scalp
+
+-   Either for a single condition or (more typically) for the difference between conditions
+
+-   Requires some wrangling of the data:
+
+    -   Goal: a data frame with a column of electrode names and a vector of amplitudes
+
+    -   Using tidyverse style here (see the note in Vignette 1, Section 1.4)
+
+```{r}
+dat_epo %>%
+  as.data.frame() %>%
+  filter(time >= tmin & time < tmax) %>%
+  select(-c(time, epoch, participant_id, recording, event_type)) %>%
+  pivot_longer(-epoch_labels, names_to = "electrode", values_to = "amplitude") %>%
+  group_by(electrode, epoch_labels) %>%
+  summarize(amplitude = mean(amplitude), .groups = "drop") %>%
+  group_split(epoch_labels) -> dats_topo
+
+head(dats_topo[[1]])
+head(dats_topo[[2]])
+```
+
+-   Create a new data frame that has the **difference** between face amplitudes and car amplitudes:
+
+```{r}
+dat_topo <- data.frame(
+  electrode = dats_topo[[1]]$electrode,
+  amplitude = dats_topo[[2]]$amplitude - dats_topo[[1]]$amplitude
+)
+head(dat_topo)
+```
+
+-   Create the topographic plot with `eegUtils`:
+
+```{r}
+topoplot(dat_topo, limits = c(-6.0, 6.0))
+```
